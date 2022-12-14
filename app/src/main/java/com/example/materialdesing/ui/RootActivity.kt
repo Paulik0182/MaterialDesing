@@ -1,7 +1,8 @@
-package com.example.materialdesing
+package com.example.materialdesing.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.materialdesing.R
 
 class RootActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
