@@ -1,6 +1,8 @@
 package com.example.materialdesing.utils
 
+import android.content.Context
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.snackbar.Snackbar
@@ -25,6 +27,11 @@ fun View.showSnackBar(
 ) {
     Snackbar.make(this, text, length).setAction(actionText, action).show()
 }
+
+fun Context.toastMake(text: String) {
+    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+}
+
 
 fun View.show(): View {
     if (visibility != View.VISIBLE) {

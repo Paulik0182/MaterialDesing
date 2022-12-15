@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface ImdbApi {
 
-    @GET("apod?api_key={apiKey}/")
+    @GET("planetary/{apiKey}/")
     fun loadPhotoDey(
         @Path("apiKey") apiKey: String
     ): Call<PhotoDayDto>
