@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">MaterialDesing</string>
+    <string name="app_name">NASA</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- bottom nav menu -->
+    <string name="photo_dey">Фото дня</string>
+    <string name="settings">Настройки</string>
 </resources>
