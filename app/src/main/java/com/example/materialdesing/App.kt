@@ -5,6 +5,7 @@ import com.example.materialdesing.data.ImdbApi
 import com.example.materialdesing.data.RetrofitPhotoDayDtoRepoImpl
 import com.example.materialdesing.domain.repo.PhotoDayDtoRepo
 import com.google.android.material.color.DynamicColors
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -13,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 // https://api.nasa.gov/planetary/apod?api_key=3YPr0zvE0A1uw2nauTAX3W89WkXfKTS4vOvDTbB8
 private const val BASE_URL = "https://api.nasa.gov/"
-private const val API_KEY = "apod?api_key=3YPr0zvE0A1uw2nauTAX3W89WkXfKTS4vOvDTbB8"
+private const val API_KEY = "3YPr0zvE0A1uw2nauTAX3W89WkXfKTS4vOvDTbB8"
 
 class App : Application() {
 
@@ -30,7 +31,8 @@ class App : Application() {
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+//            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
             .build()
     }
 

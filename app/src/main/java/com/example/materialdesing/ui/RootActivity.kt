@@ -15,6 +15,8 @@ class RootActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRootBinding
 
+    private val photoDeyFragment: PhotoDeyFragment = PhotoDeyFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRootBinding.inflate(layoutInflater)
@@ -37,7 +39,7 @@ class RootActivity : AppCompatActivity() {
         binding.bottomNavBar.setOnItemSelectedListener {
             title = it.title
             val fragment = when (it.itemId) {
-                R.id.photo_dey_item -> PhotoDeyFragment()
+                R.id.photo_dey_item -> photoDeyFragment
                 R.id.settings_item -> SettingsFragment()
                 else -> throw IllegalStateException("Нет фрагмента")
             }

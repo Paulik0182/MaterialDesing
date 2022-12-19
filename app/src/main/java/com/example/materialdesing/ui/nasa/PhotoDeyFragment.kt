@@ -48,6 +48,7 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_dey) {
     private fun setPhotoDeyDto(photoDayDto: PhotoDayDto) {
         binding.dateTextView.text = photoDayDto.date
         binding.titleTextView.text = photoDayDto.title
+        binding.explanationTextView.text = photoDayDto.explanation
 
         if (photoDayDto.url.isNotBlank()) {
             Picasso.get()

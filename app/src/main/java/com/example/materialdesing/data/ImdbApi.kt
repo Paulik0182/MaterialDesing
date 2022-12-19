@@ -3,12 +3,12 @@ package com.example.materialdesing.data
 import com.example.materialdesing.domain.entity.PhotoDayDto
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ImdbApi {
 
-    @GET("planetary/{apiKey}/")
+    @GET("planetary/apod")
     fun loadPhotoDey(
-        @Path("apiKey") apiKey: String
+        @Query("api_key") apiKey: String
     ): Call<PhotoDayDto>
 }
