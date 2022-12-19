@@ -19,12 +19,13 @@
         android:layout_margin="3dp"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.example.materialdesing.utils.MyImageView
             android:id="@+id/photo_dey_image_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_margin="8dp"
+            android:contentdescription="Фото сегодняшнего дня"
             android:adjustViewBounds="true"
             android:gravity="center"
             android:scaleType="fitXY" />
