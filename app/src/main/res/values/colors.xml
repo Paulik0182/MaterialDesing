@@ -13,4 +13,7 @@
     <color name="item_text">#670A20</color>
     <color name="bnv_default">#059EE4</color>
 
+    <color name="colorPrimary">#FF6200EE</color>
+    <color name="colorAccent">#FF03DAC5</color>
+
 </resources>

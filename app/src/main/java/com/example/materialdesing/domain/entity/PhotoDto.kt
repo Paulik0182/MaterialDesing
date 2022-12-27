@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class PhotoDayDto(
+data class PhotoDto(
     @SerializedName("date")
     val date: String,
     @SerializedName("explanation")

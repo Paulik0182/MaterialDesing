@@ -8,51 +8,81 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.materialdesing.App
 import com.example.materialdesing.R
-import com.example.materialdesing.databinding.FragmentPhotoDeyBinding
-import com.example.materialdesing.domain.entity.PhotoDayDto
-import com.example.materialdesing.domain.repo.PhotoDayDtoRepo
+import com.example.materialdesing.databinding.FragmentPhotoDescriptionBinding
+import com.example.materialdesing.domain.entity.PhotoDto
+import com.example.materialdesing.domain.repo.PhotoDtoRepo
+import com.example.materialdesing.utils.toastMake
 import com.squareup.picasso.Picasso
 
-class PhotoDeyFragment : Fragment(R.layout.fragment_photo_dey) {
+class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description) {
 
-    private var _binding: FragmentPhotoDeyBinding? = null
+    private var _binding: FragmentPhotoDescriptionBinding? = null
     private val binding get() = _binding!!
 
     private val app: App get() = requireActivity().application as App
 
-    private val photoDayDtoRepo: PhotoDayDtoRepo by lazy {
-        app.photoDayDtoRepo
+    private val photoDtoRepo: PhotoDtoRepo by lazy {
+        app.photoDtoRepo
     }
 
     private val viewModel: PhotoDeyViewModel by viewModels {
         PhotoDeyViewModel.Factory(
-            photoDayDtoRepo
+            photoDtoRepo
         )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentPhotoDeyBinding.bind(view)
+        _binding = FragmentPhotoDescriptionBinding.bind(view)
 
         viewModel.inProgressLiveData.observe(viewLifecycleOwner) { inProgress ->
             binding.photoDeyImageView.isVisible = !inProgress
             binding.progressTaskBar.isVisible = inProgress
         }
 
-        viewModel.photoDeyLiveData.observe(viewLifecycleOwner) {
-            setPhotoDeyDto(it)
+        binding.todayChip.performClick()
+        setPhotoDey()
+
+        binding.todayChip.setOnClickListener {
+            setPhotoDey()
+            context?.toastMake("Сегодня")
+        }
+
+        binding.yesterdayChip.setOnClickListener {
+            viewModel.yesterdayLiveData.observe(viewLifecycleOwner) {
+                setPhotoDto(it)
+            }
+            context?.toastMake("Вчера")
+        }
+
+        binding.twoDaysAgoChip.setOnClickListener {
+            viewModel.twoDaysAgoLiveData.observe(viewLifecycleOwner) {
+                setPhotoDto(it)
+            }
+            context?.toastMake("Позавчера")
+        }
+
+        binding.fab.setOnClickListener {
+            setPhotoDey()
+            binding.todayChip.performClick()
         }
     }
 
-    private fun setPhotoDeyDto(photoDayDto: PhotoDayDto) {
-        binding.dateTextView.text = photoDayDto.date
-        binding.titleTextView.text = photoDayDto.title
-        binding.explanationTextView.text = photoDayDto.explanation
+    private fun setPhotoDey() {
+        viewModel.photoDeyLiveData.observe(viewLifecycleOwner) {
+            setPhotoDto(it)
+        }
+    }
 
-        if (photoDayDto.url.isNotBlank()) {
+    private fun setPhotoDto(photoDto: PhotoDto) {
+        binding.dateTextView.text = photoDto.date
+        binding.titleTextView.text = photoDto.title
+        binding.explanationTextView.text = photoDto.explanation
+
+        if (photoDto.url.isNotBlank()) {
             Picasso.get()
-                .load(photoDayDto.url)
+                .load(photoDto.url)
                 .placeholder(R.drawable.uploading_images)
                 .into(binding.photoDeyImageView)
             binding.photoDeyImageView.scaleType =

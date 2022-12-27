@@ -12,7 +12,23 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <!-- FAB -->
+        <item name="colorOnPrimaryContainer">@color/bnv_default</item>
+
+        <!-- Chip -->
+        <item name="chipStyle">@style/MyChipStile</item>
+
     </style>
 
     <style name="Theme.MyTestDesing" parent="Base.Theme.MaterialDesing" />
+
+    <!-- создан свой стиль -->
+    <style name="MyChipStile" parent="Widget.Material3.Chip.Suggestion">
+
+        <item name="chipBackgroundColor">@color/bnv_default</item>
+        <item name="colorOnSecondaryContainer">@color/white</item>
+    </style>
+
+
 </resources>
