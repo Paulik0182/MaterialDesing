@@ -1,5 +1,6 @@
 package com.example.materialdesing.ui.settings
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -15,6 +16,21 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentSettingsBinding.bind(view)
+
+        binding.aboutAppButton.setOnClickListener {
+            getController().openAboutApp()
+        }
+    }
+
+    interface Controller {
+        fun openAboutApp()
+    }
+
+    private fun getController(): Controller = activity as Controller
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        getController()
     }
 
     companion object {

@@ -6,4 +6,9 @@
     <!-- bottom nav menu -->
     <string name="photo_dey">Фото дня</string>
     <string name="settings">Настройки</string>
+
+    <!-- О приложении -->
+    <string name="about_app">О приложении</string>
+    <string name="cod_version">Код версии:</string>
+    <string name="version">Версия:</string>
 </resources>
