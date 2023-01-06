@@ -2,8 +2,8 @@ package com.example.materialdesing
 
 import android.app.Application
 import com.example.materialdesing.data.ImdbApi
-import com.example.materialdesing.data.RetrofitPhotoDtoRepoImpl
-import com.example.materialdesing.domain.repo.PhotoDtoRepo
+import com.example.materialdesing.data.RetrofitPhotoRepoImpl
+import com.example.materialdesing.domain.repo.PhotoRepo
 import com.example.materialdesing.utils.bpDataFormatter
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
@@ -29,8 +29,8 @@ class App : Application() {
     private val yesterdayString = bpDataFormatter.format(yesterday).toString()
     private val twoDaysAgoString = bpDataFormatter.format(twoDaysAgo).toString()
 
-    val photoDtoRepo: PhotoDtoRepo by lazy {
-        RetrofitPhotoDtoRepoImpl(this, API_KEY, imdbApi, yesterdayString, twoDaysAgoString)
+    val photoRepo: PhotoRepo by lazy {
+        RetrofitPhotoRepoImpl(this, API_KEY, imdbApi, yesterdayString, twoDaysAgoString)
     }
 
     override fun onCreate() {

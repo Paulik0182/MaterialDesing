@@ -10,7 +10,7 @@ import com.example.materialdesing.App
 import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentPhotoDescriptionBinding
 import com.example.materialdesing.domain.entity.PhotoDto
-import com.example.materialdesing.domain.repo.PhotoDtoRepo
+import com.example.materialdesing.domain.repo.PhotoRepo
 import com.example.materialdesing.utils.toastMake
 import com.squareup.picasso.Picasso
 
@@ -21,13 +21,13 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description) {
 
     private val app: App get() = requireActivity().application as App
 
-    private val photoDtoRepo: PhotoDtoRepo by lazy {
-        app.photoDtoRepo
+    private val photoRepo: PhotoRepo by lazy {
+        app.photoRepo
     }
 
     private val viewModel: PhotoDeyViewModel by viewModels {
         PhotoDeyViewModel.Factory(
-            photoDtoRepo
+            photoRepo
         )
     }
 
