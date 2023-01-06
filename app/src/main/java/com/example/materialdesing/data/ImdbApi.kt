@@ -8,21 +8,8 @@ import retrofit2.http.Query
 interface ImdbApi {
 
     @GET("planetary/apod")
-    fun loadPhotoDey(
-        @Query("api_key") apiKey: String
-    ): Call<PhotoDto>
-
-    @GET("planetary/apod?")
-    fun loadPhotoYesterday(
-        @Query("date") date: String,
-        @Query("api_key") apiKey: String,
-    ): Call<PhotoDto>
-
-    @GET("planetary/apod?")
-    fun loadPhotoTwoDaysAgo(
+    fun loadPhotoByDay(
         @Query("date") date: String,
         @Query("api_key") apiKey: String
     ): Call<PhotoDto>
-
-
 }
