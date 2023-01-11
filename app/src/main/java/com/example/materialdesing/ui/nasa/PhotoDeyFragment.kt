@@ -1,8 +1,11 @@
 package com.example.materialdesing.ui.nasa
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -36,6 +39,8 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description) {
 
         _binding = FragmentPhotoDescriptionBinding.bind(view)
 
+        onClickIcon()
+
         viewModel.inProgressLiveData.observe(viewLifecycleOwner) { inProgress ->
             binding.photoDeyImageView.isVisible = !inProgress
             binding.progressTaskBar.isVisible = inProgress
@@ -66,6 +71,21 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description) {
         binding.fab.setOnClickListener {
             setPhotoDey()
             binding.todayChip.performClick()
+        }
+    }
+
+    private fun onClickIcon() {
+        binding.inputLayout.setEndIconOnClickListener {
+            Toast.makeText(requireContext(), "Wiki", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data =
+                    Uri.parse(
+                        "https://en.wikipedia.org/wiki/" +
+                                "${
+                                    binding.inputEditText.text.toString()
+                                }"
+                    )
+            })
         }
     }
 
