@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ds">
+
+        <!-- значения по умолчанию -->
+        <attr name="default_text" format="color" />
+        <attr name="second_plan_background" format="color" />
+        <attr name="button_background" format="color" />
+        <attr name="ic_background" format="color" />
+
+        <!-- fragment -->
+        <attr name="default_fon_fragment" format="color" />
+
+    </declare-styleable>
+</resources>

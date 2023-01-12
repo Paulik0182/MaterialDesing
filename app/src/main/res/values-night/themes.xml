@@ -12,5 +12,11 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+
+        <!-- fragment -->
+        <item name="default_fon_fragment">@color/dark_turquoise</item>
+        <item name="button_background">@color/normal_green</item>
+
     </style>
 </resources>

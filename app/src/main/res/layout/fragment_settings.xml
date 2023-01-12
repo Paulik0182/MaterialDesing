@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/default_fon_fragment"
     android:orientation="vertical"
     tools:context=".ui.settings.SettingsFragment">
 
@@ -11,13 +12,15 @@
         android:id="@+id/about_app_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="@dimen/default_layout_margin"
+        android:layout_marginTop="@dimen/default_layout_margin"
+        android:layout_marginEnd="@dimen/default_layout_margin"
+        android:layout_marginBottom="@dimen/default_layout_margin"
         android:drawableLeft="@drawable/ic_baseline_receipt_long_24"
         android:gravity="center"
-        android:text="О приложении"
+        android:text="@string/about_app"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        app:backgroundTint="#2A2BBC43" />
+        android:textSize="@dimen/default_text_size"
+        app:backgroundTint="?attr/button_background" />
 
 </LinearLayout>

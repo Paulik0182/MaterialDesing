@@ -12,6 +12,11 @@
     <string name="cod_version">Код версии:</string>
     <string name="version">Версия:</string>
 
+    <!-- Используемые как значение -->
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="day_before_yesterday">Позавчера</string>
+
 
     <!-- Википедия -->
     <string name="photo_of_the_day_stub">Photo of the day</string>
@@ -19,4 +24,7 @@
     <string name="wiki_helper_text">Поищите термин в википедии</string>
     <string name="favourite">favourite</string>
     <string name="search">Search</string>
+
+    <!-- текста заголовка -->
+    <string name="fab">Показать сегодня</string>
 </resources>

@@ -19,6 +19,11 @@
         <!-- Chip -->
         <item name="chipStyle">@style/MyChipStile</item>
 
+
+        <!-- fragment -->
+        <item name="default_fon_fragment">@color/light_turquoise</item>
+        <item name="button_background">@color/dark_green</item>
+
     </style>
 
     <style name="Theme.MyTestDesing" parent="Base.Theme.MaterialDesing" />

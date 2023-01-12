@@ -16,8 +16,15 @@
     <color name="colorPrimary">#FF6200EE</color>
     <color name="colorAccent">#FF03DAC5</color>
 
-
     <color name="color_gray">#66000000</color>
 
+    <!-- текста заголовка -->
+    <color name="header_colour">#66000000</color>
+
+    <!-- fragment -->
+    <color name="light_turquoise">#E5F8F6</color> <!-- светло бирюзовый -->
+    <color name="dark_turquoise">#21514C</color> <!-- темно бирюзовый -->
+    <color name="dark_green">#2A2BBC43</color> <!-- темно бирюзовый -->
+    <color name="normal_green">#8D2BBC43</color> <!-- темно бирюзовый -->
 
 </resources>

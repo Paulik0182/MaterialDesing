@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- стиль текста заголовка -->
+    <!--    android:style="@style/header_text_style"  Ссылка на стиль-->
+    <style name="header_text_style">
+        <item name="android:textColor">@color/header_colour</item>
+        <item name="android:textSize">@dimen/header_size</item>
+        <item name="android:layout_marginLeft">@dimen/header_margin_left</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+</resources>

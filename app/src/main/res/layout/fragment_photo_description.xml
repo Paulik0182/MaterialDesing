@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAF6ED"
+    android:background="?attr/default_fon_fragment"
     android:orientation="vertical"
     tools:context=".ui.nasa.PhotoDeyFragment">
 
@@ -22,7 +22,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_layout_margin"
+            android:layout_marginEnd="@dimen/default_layout_margin">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout"
@@ -50,7 +52,7 @@
                 android:id="@+id/chip_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
+                android:layout_margin="@dimen/margin_chip_group"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/input_layout"
@@ -63,20 +65,20 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Сегодня" />
+                    android:text="@string/today" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/yesterday_chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Вчера" />
+                    android:text="@string/yesterday" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/two_days_ago_chip"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Позавчера" />
+                    android:text="@string/day_before_yesterday" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -87,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/default_layout_margin"
             android:adjustViewBounds="true"
             android:gravity="center"
             android:scaleType="fitXY" />
@@ -96,20 +98,26 @@
             android:id="@+id/date_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginStart="@dimen/default_layout_margin"
+            android:layout_marginTop="@dimen/default_layout_margin_top_bottom"
+            android:layout_marginEnd="@dimen/default_layout_margin"
+            android:layout_marginBottom="@dimen/default_layout_margin_top_bottom"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/default_text"
             android:textStyle="italic" />
 
         <TextView
             android:id="@+id/title_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginStart="@dimen/default_layout_margin"
+            android:layout_marginTop="@dimen/default_layout_margin_top_bottom"
+            android:layout_marginEnd="@dimen/default_layout_margin"
+            android:layout_marginBottom="@dimen/default_layout_margin_top_bottom"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/default_text"
             android:textStyle="italic" />
 
         <ScrollView
@@ -125,10 +133,13 @@
                     android:id="@+id/explanation_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="@dimen/default_layout_margin"
+                    android:layout_marginTop="@dimen/default_layout_margin_top_bottom"
+                    android:layout_marginEnd="@dimen/default_layout_margin"
+                    android:layout_marginBottom="@dimen/default_layout_margin_top_bottom"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/default_text"
                     android:textStyle="italic" />
 
             </LinearLayout>
@@ -141,8 +152,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_margin="20dp"
-        android:contentDescription="Добавить"
+        android:layout_margin="@dimen/header_fab"
+        android:contentDescription="@string/fab"
         android:src="@drawable/add_header" />
 
 </FrameLayout>
