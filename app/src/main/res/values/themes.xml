@@ -20,9 +20,12 @@
         <item name="chipStyle">@style/MyChipStile</item>
 
 
-        <!-- fragment -->
+        <!-- fragment из файла attrs.xml-->
         <item name="default_fon_fragment">@color/light_turquoise</item>
         <item name="button_background">@color/dark_green</item>
+        <item name="default_text">@color/black</item>
+
+        <item name="ic_background">@color/orange_500</item>
 
     </style>
 
@@ -33,6 +36,16 @@
 
         <item name="chipBackgroundColor">@color/bnv_default</item>
         <item name="colorOnSecondaryContainer">@color/white</item>
+    </style>
+
+    <style name="MyTheme" parent="Base.Theme.MaterialDesing">
+
+        <item name="colorPrimary">@color/indigo</item>
+        <item name="colorPrimaryDark">@color/indigo_dark</item>
+        <item name="colorAccent">@color/indigo_light</item>
+
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/light_gray</item>
     </style>
 
 

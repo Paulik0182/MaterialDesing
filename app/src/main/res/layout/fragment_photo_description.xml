@@ -2,9 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/frame_layout_style"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/frame_layout_style"
     tools:context=".ui.nasa.PhotoDeyFragment">
 
     <ProgressBar
@@ -67,9 +67,9 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/yesterday_chip"
+                    style="@style/MyChipStile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/MyChipStile"
                     android:text="@string/yesterday" />
 
                 <com.google.android.material.chip.Chip
@@ -95,15 +95,17 @@
 
         <TextView
             android:id="@+id/date_text_view"
+            style="@style/default_text_view_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/default_text_view_style" />
+            android:fontFamily="@font/anagram_allfont_ru" />
 
         <TextView
             android:id="@+id/title_text_view"
+            style="@style/default_text_view_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/default_text_view_style" />
+            android:fontFamily="@font/caveat_variable_font_wght_ru" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -116,9 +118,10 @@
 
                 <TextView
                     android:id="@+id/explanation_text_view"
+                    style="@style/default_text_view_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/default_text_view_style" />
+                    android:fontFamily="@font/playfair_display_bold_allfont_ru" />
 
             </LinearLayout>
 

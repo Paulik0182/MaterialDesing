@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/frame_layout_style"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.settings.personalization.PersonalizationAppStylesFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/default_layout_margin"
+        android:layout_marginTop="@dimen/default_layout_margin"
+        android:layout_marginEnd="@dimen/default_layout_margin"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/message_title_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/playfair_display_bold_allfont_ru"
+            android:gravity="center"
+            android:text="@string/personalization_app"
+            android:textColor="?attr/default_text"
+            android:textSize="@dimen/default_text" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_light_dark_themes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_layout_margin"
+            android:fontFamily="@font/playfair_display_bold_allfont_ru"
+            android:text="@string/switch_light_dark_theme"
+            android:textColor="?attr/default_text"
+            android:textOff="@string/text_off"
+            android:textOn="@string/text_on"
+            app:showText="true"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+</LinearLayout>

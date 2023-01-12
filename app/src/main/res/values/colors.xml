@@ -21,6 +21,10 @@
     <!-- текста заголовка -->
     <color name="header_colour">#66000000</color>
 
+    <!--  drawable  -->
+    <color name="orange_500">#A08500</color>
+    <color name="orange_300">#EAC300</color>
+
     <!-- fragment -->
     <color name="light_turquoise">#E5F8F6</color> <!-- светло бирюзовый -->
     <color name="dark_turquoise">#21514C</color> <!-- темно бирюзовый -->

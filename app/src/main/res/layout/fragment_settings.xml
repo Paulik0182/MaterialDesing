@@ -8,6 +8,15 @@
     tools:context=".ui.settings.SettingsFragment">
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/personalization_app_styles_button"
+        style="@style/button_settings_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_style_24"
+        android:text="@string/personalization_app"
+        app:backgroundTint="?attr/button_background" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/about_app_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

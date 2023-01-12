@@ -17,6 +17,10 @@
         <!-- fragment -->
         <item name="default_fon_fragment">@color/dark_turquoise</item>
         <item name="button_background">@color/normal_green</item>
+        <item name="ic_background">@color/orange_300</item>
+
+        <!-- text -->
+        <item name="default_text">@color/white</item>
 
     </style>
 </resources>

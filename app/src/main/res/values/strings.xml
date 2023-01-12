@@ -9,6 +9,7 @@
 
     <!-- О приложении -->
     <string name="about_app">О приложении</string>
+    <string name="personalization_app">Персонализация</string>
     <string name="cod_version">Код версии:</string>
     <string name="version">Версия:</string>
 
@@ -27,4 +28,11 @@
 
     <!-- текста заголовка -->
     <string name="fab">Показать сегодня</string>
+
+    <!-- Переключатель тем -->
+    <string name="text_off">Светлая</string>
+    <string name="text_on">Темная</string>
+    <string name="switch_light_dark_theme">Светлая / Темная тема</string>
+
+
 </resources>
