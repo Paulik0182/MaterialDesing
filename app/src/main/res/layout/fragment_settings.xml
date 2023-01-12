@@ -4,23 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/default_fon_fragment"
-    android:orientation="vertical"
+    style="@style/frame_layout_style"
     tools:context=".ui.settings.SettingsFragment">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/about_app_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_layout_margin"
-        android:layout_marginTop="@dimen/default_layout_margin"
-        android:layout_marginEnd="@dimen/default_layout_margin"
-        android:layout_marginBottom="@dimen/default_layout_margin"
         android:drawableLeft="@drawable/ic_baseline_receipt_long_24"
-        android:gravity="center"
         android:text="@string/about_app"
-        android:textColor="@color/black"
-        android:textSize="@dimen/default_text_size"
+        style="@style/button_settings_style"
         app:backgroundTint="?attr/button_background" />
 
 </LinearLayout>

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/default_fon_fragment"
-    android:orientation="vertical"
+    style="@style/frame_layout_style"
     tools:context=".ui.nasa.PhotoDeyFragment">
 
     <ProgressBar
@@ -17,7 +16,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="3dp"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,6 +69,7 @@
                     android:id="@+id/yesterday_chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/MyChipStile"
                     android:text="@string/yesterday" />
 
                 <com.google.android.material.chip.Chip
@@ -98,27 +97,13 @@
             android:id="@+id/date_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_layout_margin"
-            android:layout_marginTop="@dimen/default_layout_margin_top_bottom"
-            android:layout_marginEnd="@dimen/default_layout_margin"
-            android:layout_marginBottom="@dimen/default_layout_margin_top_bottom"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/default_text"
-            android:textStyle="italic" />
+            style="@style/default_text_view_style" />
 
         <TextView
             android:id="@+id/title_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_layout_margin"
-            android:layout_marginTop="@dimen/default_layout_margin_top_bottom"
-            android:layout_marginEnd="@dimen/default_layout_margin"
-            android:layout_marginBottom="@dimen/default_layout_margin_top_bottom"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/default_text"
-            android:textStyle="italic" />
+            style="@style/default_text_view_style" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -133,14 +118,7 @@
                     android:id="@+id/explanation_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_layout_margin"
-                    android:layout_marginTop="@dimen/default_layout_margin_top_bottom"
-                    android:layout_marginEnd="@dimen/default_layout_margin"
-                    android:layout_marginBottom="@dimen/default_layout_margin_top_bottom"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/default_text"
-                    android:textStyle="italic" />
+                    style="@style/default_text_view_style" />
 
             </LinearLayout>
 

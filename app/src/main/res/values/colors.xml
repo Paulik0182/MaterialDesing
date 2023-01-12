@@ -24,7 +24,17 @@
     <!-- fragment -->
     <color name="light_turquoise">#E5F8F6</color> <!-- светло бирюзовый -->
     <color name="dark_turquoise">#21514C</color> <!-- темно бирюзовый -->
-    <color name="dark_green">#2A2BBC43</color> <!-- темно бирюзовый -->
-    <color name="normal_green">#8D2BBC43</color> <!-- темно бирюзовый -->
+    <color name="dark_green">#2A2BBC43</color> <!-- темно зеленый -->
+    <color name="normal_green">#8D2BBC43</color> <!-- нормально зеленый -->
+
+    <!-- для MyTheme -->
+    <color name="light_gray">#a7c0cd</color> <!-- светло-серый -->
+    <color name="indigo">#6002ee</color> <!-- индиго -->
+    <color name="indigo_dark">#0000ba</color> <!-- темно-синий -->
+    <color name="indigo_light">#9c47ff</color> <!-- светлый-индиго -->
+    <color name="green">#FF03DAC5</color> <!-- зеленый -->
+    <color name="pink">#e040fb</color> <!-- розовый -->
+    <color name="pink_dark">#aa00c7</color> <!-- розовый темный -->
+    <color name="pink_light">#ff79ff</color> <!-- розовый светлый -->
 
 </resources>

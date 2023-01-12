@@ -11,4 +11,33 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="default_text_view_style">
+        <item name="android:layout_marginStart">@dimen/default_layout_margin</item>
+        <item name="android:layout_marginTop">@dimen/default_layout_margin_top_bottom</item>
+        <item name="android:layout_marginEnd">@dimen/default_layout_margin</item>
+        <item name="android:layout_marginBottom">@dimen/default_layout_margin_top_bottom</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/default_text</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="frame_layout_style">
+        <item name="android:background">?attr/default_fon_fragment</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="orientation_button_base_style">
+        <item name="android:layout_marginStart">@dimen/default_layout_margin</item>
+        <item name="android:layout_marginTop">@dimen/default_layout_margin</item>
+        <item name="android:layout_marginEnd">@dimen/default_layout_margin</item>
+        <item name="android:layout_marginBottom">@dimen/default_layout_margin</item>
+    </style>
+
+    <style name="button_settings_style" parent="orientation_button_base_style">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/default_text_size</item>
+    </style>
+
 </resources>
