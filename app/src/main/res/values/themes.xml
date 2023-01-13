@@ -27,6 +27,8 @@
 
         <item name="ic_background">@color/orange_500</item>
 
+        <item name="big_text">@dimen/default_text_size</item>
+
     </style>
 
     <style name="Theme.MyTestDesing" parent="Base.Theme.MaterialDesing" />

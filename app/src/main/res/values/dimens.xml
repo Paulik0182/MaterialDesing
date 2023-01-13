@@ -17,6 +17,6 @@
     <dimen name="header_margin_left">18sp</dimen>
     <dimen name="header_fab">20sp</dimen>
 
-    <!-- TextInputLayout -->
+    <dimen name="bug_title_text">30sp</dimen>
 
 </resources>

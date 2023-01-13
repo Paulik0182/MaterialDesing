@@ -21,6 +21,8 @@
 
         <!-- text -->
         <item name="default_text">@color/white</item>
+        <item name="big_text">@dimen/bug_title_text</item>
+
 
     </style>
 </resources>

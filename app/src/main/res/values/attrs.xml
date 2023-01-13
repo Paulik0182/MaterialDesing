@@ -11,5 +11,6 @@
         <!-- fragment -->
         <attr name="default_fon_fragment" format="color" />
 
+        <attr name="big_text" format="dimension" />
     </declare-styleable>
 </resources>
