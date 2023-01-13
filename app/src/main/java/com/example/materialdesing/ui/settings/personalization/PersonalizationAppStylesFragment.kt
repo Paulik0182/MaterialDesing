@@ -19,6 +19,8 @@ class PersonalizationAppStylesFragment : Fragment(R.layout.fragment_personalizat
         _binding = FragmentPersonalizationAppStylesBinding.bind(view)
 
         clickThemeSwitchLightDark()
+
+        clickThemeChipGroup()
     }
 
     private fun clickThemeSwitchLightDark() {
@@ -32,6 +34,16 @@ class PersonalizationAppStylesFragment : Fragment(R.layout.fragment_personalizat
                     AppCompatDelegate.MODE_NIGHT_NO
                 }
             )
+        }
+    }
+
+    private fun clickThemeChipGroup() {
+        binding.themeChipGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.pink_theme_chip -> requireContext().setTheme(R.style.PinkTheme)
+                R.id.green_theme_chip -> requireContext().setTheme(R.style.GreenTheme)
+                R.id.white_theme_chip -> requireContext().setTheme(R.style.WhiteTheme)
+            }
         }
     }
 

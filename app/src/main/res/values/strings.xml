@@ -33,6 +33,9 @@
     <string name="text_off">Светлая</string>
     <string name="text_on">Темная</string>
     <string name="switch_light_dark_theme">Светлая / Темная тема</string>
+    <string name="pink_theme">Розовый</string>
+    <string name="white_theme">Белый</string>
+    <string name="green_theme">Зеленый</string>
 
 
 </resources>

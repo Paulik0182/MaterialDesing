@@ -36,9 +36,17 @@
     <color name="indigo">#6002ee</color> <!-- индиго -->
     <color name="indigo_dark">#0000ba</color> <!-- темно-синий -->
     <color name="indigo_light">#9c47ff</color> <!-- светлый-индиго -->
-    <color name="green">#FF03DAC5</color> <!-- зеленый -->
+
     <color name="pink">#e040fb</color> <!-- розовый -->
+    <color name="white_pink">#F2A8FF</color> <!-- бело розовый -->
+    <color name="black_pink">#7F0295</color> <!-- черно розовый -->
     <color name="pink_dark">#aa00c7</color> <!-- розовый темный -->
     <color name="pink_light">#ff79ff</color> <!-- розовый светлый -->
+
+    <color name="white_green">#8DAFF6BB</color> <!-- нормально зеленый -->
+    <color name="green">#8D07FA30</color> <!-- зеленый -->
+    <color name="turquoise">#7CA9DA</color> <!-- бюр -->
+    <color name="white_red">#EF9F9F</color> <!-- зеленый -->
+
 
 </resources>
