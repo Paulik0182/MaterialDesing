@@ -4,20 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    style="@style/frame_layout_style"
     tools:context=".ui.settings.SettingsFragment">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/personalization_app_styles_button"
+        style="@style/button_settings_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_style_24"
+        android:text="@string/personalization_app"
+        app:backgroundTint="?attr/button_background" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/about_app_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:drawableLeft="@drawable/ic_baseline_receipt_long_24"
-        android:gravity="center"
-        android:text="О приложении"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:backgroundTint="#2A2BBC43" />
+        android:text="@string/about_app"
+        style="@style/button_settings_style"
+        app:backgroundTint="?attr/button_background" />
 
 </LinearLayout>

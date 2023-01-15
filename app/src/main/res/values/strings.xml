@@ -9,6 +9,33 @@
 
     <!-- О приложении -->
     <string name="about_app">О приложении</string>
+    <string name="personalization_app">Персонализация</string>
     <string name="cod_version">Код версии:</string>
     <string name="version">Версия:</string>
+
+    <!-- Используемые как значение -->
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="day_before_yesterday">Позавчера</string>
+
+
+    <!-- Википедия -->
+    <string name="photo_of_the_day_stub">Photo of the day</string>
+    <string name="search_wiki">Найти в Википедии</string>
+    <string name="wiki_helper_text">Поищите термин в википедии</string>
+    <string name="favourite">favourite</string>
+    <string name="search">Search</string>
+
+    <!-- текста заголовка -->
+    <string name="fab">Показать сегодня</string>
+
+    <!-- Переключатель тем -->
+    <string name="text_off">Светлая</string>
+    <string name="text_on">Темная</string>
+    <string name="switch_light_dark_theme">Светлая / Темная тема</string>
+    <string name="pink_theme">Розовый</string>
+    <string name="white_theme">Белый</string>
+    <string name="green_theme">Зеленый</string>
+
+
 </resources>

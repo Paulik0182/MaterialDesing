@@ -1,8 +1,11 @@
 package com.example.materialdesing.ui.nasa
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -10,7 +13,7 @@ import com.example.materialdesing.App
 import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentPhotoDescriptionBinding
 import com.example.materialdesing.domain.entity.PhotoDto
-import com.example.materialdesing.domain.repo.PhotoDtoRepo
+import com.example.materialdesing.domain.repo.PhotoRepo
 import com.example.materialdesing.utils.toastMake
 import com.squareup.picasso.Picasso
 
@@ -21,13 +24,13 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description) {
 
     private val app: App get() = requireActivity().application as App
 
-    private val photoDtoRepo: PhotoDtoRepo by lazy {
-        app.photoDtoRepo
+    private val photoRepo: PhotoRepo by lazy {
+        app.photoRepo
     }
 
     private val viewModel: PhotoDeyViewModel by viewModels {
         PhotoDeyViewModel.Factory(
-            photoDtoRepo
+            photoRepo
         )
     }
 
@@ -35,6 +38,8 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description) {
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentPhotoDescriptionBinding.bind(view)
+
+        onClickIcon()
 
         viewModel.inProgressLiveData.observe(viewLifecycleOwner) { inProgress ->
             binding.photoDeyImageView.isVisible = !inProgress
@@ -66,6 +71,21 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description) {
         binding.fab.setOnClickListener {
             setPhotoDey()
             binding.todayChip.performClick()
+        }
+    }
+
+    private fun onClickIcon() {
+        binding.inputLayout.setEndIconOnClickListener {
+            Toast.makeText(requireContext(), "Wiki", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data =
+                    Uri.parse(
+                        "https://en.wikipedia.org/wiki/" +
+                                "${
+                                    binding.inputEditText.text.toString()
+                                }"
+                    )
+            })
         }
     }
 

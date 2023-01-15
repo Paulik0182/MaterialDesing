@@ -12,5 +12,70 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+
+        <!-- fragment -->
+        <item name="default_fon_fragment">@color/dark_turquoise</item>
+        <item name="button_background">@color/normal_green</item>
+        <item name="ic_background">@color/orange_300</item>
+
+        <!-- text -->
+        <item name="default_text">@color/white</item>
+        <item name="big_text">@dimen/bug_title_text</item>
+
     </style>
+
+    <style name="MyTheme" parent="Base.Theme.MaterialDesing">
+
+        <item name="colorPrimary">@color/pink</item>
+        <item name="colorPrimaryDark">@color/pink_dark</item>
+        <item name="colorAccent">@color/pink_light</item>
+
+        <item name="android:textColorPrimary">@color/indigo_light</item>
+        <item name="android:textColorSecondary">@color/light_gray</item>
+
+        <!-- fragment -->
+        <item name="default_fon_fragment">@color/black_pink</item>
+        <item name="button_background">@color/pink_dark</item>
+        <item name="ic_background">@color/orange_300</item>
+
+        <!-- text -->
+        <item name="default_text">@color/white_pink</item>
+        <item name="big_text">@dimen/bug_title_text</item>
+    </style>
+
+    <style name="WhiteTheme" parent="Base.Theme.MaterialDesing">
+
+        <item name="colorPrimary">@color/indigo</item>
+
+        <item name="android:textColorPrimary">@color/indigo_light</item>
+        <item name="android:textColorSecondary">@color/light_gray</item>
+
+        <!-- fragment из файла attrs.xml-->
+        <item name="default_fon_fragment">@color/teal_200</item>
+        <item name="button_background">@color/light_turquoise</item>
+        <item name="default_text">@color/white</item>
+
+        <item name="ic_background">@color/orange_500</item>
+
+        <item name="big_text">@dimen/default_text_size</item>
+    </style>
+
+    <style name="GreenTheme" parent="Base.Theme.MaterialDesing">
+
+        <item name="colorPrimary">@color/white</item>
+
+        <item name="android:textColorPrimary">@color/indigo_light</item>
+        <item name="android:textColorSecondary">@color/light_gray</item>
+
+        <!-- fragment из файла attrs.xml-->
+        <item name="default_fon_fragment">@color/normal_green</item>
+        <item name="button_background">@color/turquoise</item>
+        <item name="default_text">@color/white_red</item>
+
+        <item name="ic_background">@color/orange_500</item>
+
+        <item name="big_text">@dimen/default_text_size</item>
+    </style>
+
 </resources>

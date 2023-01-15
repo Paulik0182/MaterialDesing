@@ -20,10 +20,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.aboutAppButton.setOnClickListener {
             getController().openAboutApp()
         }
+
+        binding.personalizationAppStylesButton.setOnClickListener {
+            getController().openPersonalizationAppStyles()
+        }
     }
 
     interface Controller {
         fun openAboutApp()
+        fun openPersonalizationAppStyles()
     }
 
     private fun getController(): Controller = activity as Controller

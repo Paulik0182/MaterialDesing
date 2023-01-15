@@ -9,11 +9,13 @@ import com.example.materialdesing.databinding.ActivityRootBinding
 import com.example.materialdesing.ui.nasa.PhotoDeyFragment
 import com.example.materialdesing.ui.settings.AboutAppFragment
 import com.example.materialdesing.ui.settings.SettingsFragment
+import com.example.materialdesing.ui.settings.personalization.PersonalizationAppStylesFragment
 
 private const val TAG_ROOT_CONTAINER_LAYOUT_KEY = "TAG_ROOT_CONTAINER_LAYOUT_KEY"
 
 class RootActivity : AppCompatActivity(),
-    SettingsFragment.Controller {
+    SettingsFragment.Controller,
+    PersonalizationAppStylesFragment.Controller {
 
     private lateinit var binding: ActivityRootBinding
 
@@ -69,8 +71,21 @@ class RootActivity : AppCompatActivity(),
             .commit()
     }
 
+    private fun onPersonalizationAppStyles() {
+        val fragment: Fragment = PersonalizationAppStylesFragment.newInstance()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.fragmentContainerFrameLayout.id, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     override fun openAboutApp() {
         onAboutApp()
+    }
+
+    override fun openPersonalizationAppStyles() {
+        onPersonalizationAppStyles()
     }
 
 

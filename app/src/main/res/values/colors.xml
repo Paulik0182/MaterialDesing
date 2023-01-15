@@ -16,4 +16,37 @@
     <color name="colorPrimary">#FF6200EE</color>
     <color name="colorAccent">#FF03DAC5</color>
 
+    <color name="color_gray">#66000000</color>
+
+    <!-- текста заголовка -->
+    <color name="header_colour">#66000000</color>
+
+    <!--  drawable  -->
+    <color name="orange_500">#A08500</color>
+    <color name="orange_300">#EAC300</color>
+
+    <!-- fragment -->
+    <color name="light_turquoise">#E5F8F6</color> <!-- светло бирюзовый -->
+    <color name="dark_turquoise">#21514C</color> <!-- темно бирюзовый -->
+    <color name="dark_green">#2A2BBC43</color> <!-- темно зеленый -->
+    <color name="normal_green">#8D2BBC43</color> <!-- нормально зеленый -->
+
+    <!-- для MyTheme -->
+    <color name="light_gray">#a7c0cd</color> <!-- светло-серый -->
+    <color name="indigo">#6002ee</color> <!-- индиго -->
+    <color name="indigo_dark">#0000ba</color> <!-- темно-синий -->
+    <color name="indigo_light">#9c47ff</color> <!-- светлый-индиго -->
+
+    <color name="pink">#e040fb</color> <!-- розовый -->
+    <color name="white_pink">#F2A8FF</color> <!-- бело розовый -->
+    <color name="black_pink">#7F0295</color> <!-- черно розовый -->
+    <color name="pink_dark">#aa00c7</color> <!-- розовый темный -->
+    <color name="pink_light">#ff79ff</color> <!-- розовый светлый -->
+
+    <color name="white_green">#8DAFF6BB</color> <!-- нормально зеленый -->
+    <color name="green">#8D07FA30</color> <!-- зеленый -->
+    <color name="turquoise">#7CA9DA</color> <!-- бюр -->
+    <color name="white_red">#EF9F9F</color> <!-- зеленый -->
+
+
 </resources>

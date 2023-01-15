@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.materialdesing.BuildConfig
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -32,6 +33,12 @@ fun Context.toastMake(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
 
+// только для дебажной версии
+fun Context.showDebugToast(text: String) {
+    if (BuildConfig.DEBUG) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    }
+}
 
 fun View.show(): View {
     if (visibility != View.VISIBLE) {
