@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.materialdesing.R
 import com.example.materialdesing.databinding.ActivityBarViewBinding
 import com.example.materialdesing.ui.navigation.earth.EarthFragment
+import com.google.android.material.badge.BadgeDrawable
 
 private const val TAG_BAR_VIEW_ACTIVITY_CONTAINER_LAYOUT_KEY =
     "TAG_BAR_VIEW_ACTIVITY_CONTAINER_LAYOUT_KEY"
@@ -26,6 +27,17 @@ class BarViewActivity : AppCompatActivity() {
         } else {
             // todo что-то другое
         }
+
+        onBadgeSystem()
+    }
+
+    private fun onBadgeSystem() {
+        // badge - возможность значку поставить подпись, только число
+        val badge = binding.bottomNavPlanetsBar.getOrCreateBadge(R.id.action_view_system_item)
+        badge.number = 1000
+        badge.maxCharacterCount = 5 // у badge по умолчанию 4 символа (расширили кол. символов)
+        // размещаем badge (надпись) в конкретном углу значка
+        badge.badgeGravity = BadgeDrawable.BOTTOM_START
     }
 
     private fun onBottomNavBar() {
@@ -60,5 +72,12 @@ class BarViewActivity : AppCompatActivity() {
                 fragment,
                 TAG_BAR_VIEW_ACTIVITY_CONTAINER_LAYOUT_KEY
             ).commit()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // удаляем badge (обязательно нужно занулять)
+        binding.bottomNavPlanetsBar.removeBadge(R.id.action_view_earth_item)
+        binding.bottomNavPlanetsBar.removeBadge(R.id.action_view_system_item)
     }
 }
