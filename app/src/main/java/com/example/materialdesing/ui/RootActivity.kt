@@ -1,5 +1,6 @@
 package com.example.materialdesing.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.materialdesing.R
 import com.example.materialdesing.databinding.ActivityRootBinding
 import com.example.materialdesing.ui.nasa.PhotoDeyFragment
+import com.example.materialdesing.ui.navigation.BarViewActivity
 import com.example.materialdesing.ui.settings.AboutAppFragment
 import com.example.materialdesing.ui.settings.SettingsFragment
 import com.example.materialdesing.ui.settings.personalization.PersonalizationAppStylesFragment
@@ -42,12 +44,18 @@ class RootActivity : AppCompatActivity(),
     private fun onBottomNavBar() {
         binding.bottomNavBar.setOnItemSelectedListener {
             title = it.title
-            val fragment = when (it.itemId) {
-                R.id.photo_dey_item -> photoDeyFragment
-                R.id.settings_item -> SettingsFragment()
-                else -> throw IllegalStateException("Нет фрагмента")
+            when (it.itemId) {
+                R.id.photo_dey_item -> {
+                    swapFragment(photoDeyFragment)
+                }
+                R.id.settings_item -> {
+                    swapFragment(SettingsFragment())
+                }
+                R.id.app_bar_bottom_navigation -> {
+                    val intent = Intent(this, BarViewActivity::class.java)
+                    startActivity(intent)
+                }
             }
-            swapFragment(fragment)
             return@setOnItemSelectedListener true
         }
     }

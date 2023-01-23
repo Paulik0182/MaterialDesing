@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_view_earth_item"
+        android:icon="@drawable/earth"
+        android:title="@string/earth_tab_text"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_view_mars_item"
+        android:icon="@drawable/mars"
+        android:title="@string/mars_tab_text"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_view_system_item"
+        android:icon="@drawable/system"
+        android:title="@string/weather_tab_text"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/exit_item"
+        android:icon="@drawable/ic_exit_fab"
+        android:title="@string/exit_tab_text"
+        app:showAsAction="ifRoom" />
+
+</menu>
