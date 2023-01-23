@@ -1,4 +1,4 @@
-package com.example.materialdesing.ui.navigation.earth
+package com.example.materialdesing.ui.planets.earth
 
 import android.os.Bundle
 import android.view.View

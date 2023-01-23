@@ -1,11 +1,12 @@
-package com.example.materialdesing.ui.navigation
+package com.example.materialdesing.ui.planets.earth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.materialdesing.R
 import com.example.materialdesing.databinding.ActivityBarViewBinding
-import com.example.materialdesing.ui.navigation.earth.EarthFragment
+import com.example.materialdesing.ui.planets.MarsFragment
+import com.example.materialdesing.ui.planets.SystemFragment
 import com.google.android.material.badge.BadgeDrawable
 
 private const val TAG_BAR_VIEW_ACTIVITY_CONTAINER_LAYOUT_KEY =

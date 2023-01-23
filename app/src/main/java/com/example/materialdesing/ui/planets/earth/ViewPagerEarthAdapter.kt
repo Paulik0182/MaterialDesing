@@ -1,4 +1,4 @@
-package com.example.materialdesing.ui.navigation.earth
+package com.example.materialdesing.ui.planets.earth
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
