@@ -9,6 +9,8 @@ import com.example.materialdesing.domain.repo.EarthRepo
 import com.example.materialdesing.domain.repo.MarsRepo
 import com.example.materialdesing.domain.repo.PhotoRepo
 import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -25,9 +27,13 @@ private const val BASE_URL = "https://api.nasa.gov/"
 private const val API_KEY = "3YPr0zvE0A1uw2nauTAX3W89WkXfKTS4vOvDTbB8"
 
 class App : Application() {
+    private val interceptor = HttpLoggingInterceptor().apply {
+        this.setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+    private val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
     private val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
+        Retrofit.Builder().client(client)
             .baseUrl(BASE_URL)
 //            .addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))

@@ -1,10 +1,10 @@
 package com.example.materialdesing.data
 
 import com.example.materialdesing.domain.entity.PhotoDto
-import com.example.materialdesing.domain.entity.earth.EarthDto
 import com.example.materialdesing.domain.entity.earth.EarthDtoItem
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import ru.geekbrains.nasaapi.repository.dto.MarsPhotosServerResponseData
 
@@ -17,13 +17,13 @@ interface ImdbApi {
     ): Call<PhotoDto>
 
     // земля
-// https://api.nasa.gov/EPIC/api/natural/date/2019-05-30?api_key=DEMO_KEY
-
-    @GET("EPIC/api/natural/date/")
+// https://api.nasa.gov/EPIC/api/natural/date/2022-01-22?api_key=3YPr0zvE0A1uw2nauTAX3W89WkXfKTS4vOvDTbB8
+// https://epic.gsfc.nasa.gov/archive/natural/' + year + '/' + month + '/' + day + '/jpg/' + 'IMAGE_NAME+ '.jpg';
+    @GET("EPIC/api/natural/date/{date}")
     fun epicPhotoByDay(
-        @Query("date") date: String,
+        @Path("date") date: String,
         @Query("api_key") apiKey: String
-    ): Call<List<EarthDto>>
+    ): Call<List<EarthDtoItem>>
 
     @GET("EPIC/api/natural/date/")
     fun marsPhotoByDay(

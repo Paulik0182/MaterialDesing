@@ -8,7 +8,7 @@ class ViewPagerEarthAdapter(fragment: Fragment) :
 
     // СПИСОК ФРАГМЕНТОВ
     val fragments = arrayOf(
-        FotoEarthFragment(),
+        FotoEarthFragment.newInstance(),
         FotoEarthFragment(),
         FotoEarthFragment()
     )

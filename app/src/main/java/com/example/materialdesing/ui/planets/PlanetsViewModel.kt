@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.materialdesing.domain.entity.earth.EarthDto
+import com.example.materialdesing.domain.entity.earth.EarthDtoItem
 import com.example.materialdesing.domain.repo.EarthRepo
 import com.example.materialdesing.domain.repo.MarsRepo
 import com.example.materialdesing.utils.mutable
@@ -23,9 +23,9 @@ class PlanetsViewModel(
     }
 
 
-    val photoDeyLiveData: LiveData<List<EarthDto>> = MutableLiveData()
-    val yesterdayLiveData: LiveData<List<EarthDto>> = MutableLiveData()
-    val twoDaysAgoLiveData: LiveData<List<EarthDto>> = MutableLiveData()
+    val photoDeyLiveData: LiveData<List<EarthDtoItem>> = MutableLiveData()
+    val yesterdayLiveData: LiveData<List<EarthDtoItem>> = MutableLiveData()
+    val twoDaysAgoLiveData: LiveData<List<EarthDtoItem>> = MutableLiveData()
 
     val marsLiveData: LiveData<MarsPhotosServerResponseData> = MutableLiveData()
 
@@ -35,15 +35,15 @@ class PlanetsViewModel(
                 photoDeyLiveData.mutable().postValue(it)
             }
         }
-        if (yesterdayLiveData.value == null) {
-            earthRepo.getEarthYesterday {
-                yesterdayLiveData.mutable().postValue(it)
-            }
-        }
-        if (marsLiveData.value == null) {
-            marsRepo.getMarsToday {
-                marsLiveData.mutable().postValue(it)
-            }
-        }
+//        if (yesterdayLiveData.value == null) {
+//            earthRepo.getEarthYesterday {
+//                yesterdayLiveData.mutable().postValue(it)
+//            }
+//        }
+//        if (marsLiveData.value == null) {
+//            marsRepo.getMarsToday {
+//                marsLiveData.mutable().postValue(it)
+//            }
+//        }
     }
 }

@@ -58,25 +58,31 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
                         R.drawable.swipe_indicator_active
                     )
 //                    setPhotoDto(R.drawable.ic_earth)
-                    binding.fotoEarthImageView.setImageResource(R.drawable.ic_earth)
+                    viewModel.photoDeyLiveData.observe(viewLifecycleOwner) {
+                        setPhotoDto(
+                            it.last()
+                        )
+                        Toast.makeText(requireContext(), "Привет", Toast.LENGTH_SHORT).show()
+                    }
+//                    binding.fotoEarthImageView.setImageResource(R.drawable.ic_earth)
                 }
-                YESTERDAY_EARTH -> {
-                    Toast.makeText(requireContext(), "1", Toast.LENGTH_SHORT).show()
-                    onDefaultPagination()
-                    binding.yesterdayPaginationImageView.setImageResource(
-                        R.drawable.swipe_indicator_active
-                    )
-//                    setPhotoDto(R.drawable.ic_mars)
-                    binding.fotoEarthImageView.setImageResource(R.drawable.ic_mars)
-                }
-                TWO_DATS_AGO_EARTH -> {
-                    onDefaultPagination()
-                    binding.dayBeforeYesterdayPaginationImageView.setImageResource(
-                        R.drawable.swipe_indicator_active
-                    )
-//                    setPhotoDto(R.drawable.ic_system)
-                    binding.fotoEarthImageView.setImageResource(R.drawable.ic_system)
-                }
+//                YESTERDAY_EARTH -> {
+//                    Toast.makeText(requireContext(), "1", Toast.LENGTH_SHORT).show()
+//                    onDefaultPagination()
+//                    binding.yesterdayPaginationImageView.setImageResource(
+//                        R.drawable.swipe_indicator_active
+//                    )
+////                    setPhotoDto(R.drawable.ic_mars)
+//                    binding.fotoEarthImageView.setImageResource(R.drawable.ic_mars)
+//                }
+//                TWO_DATS_AGO_EARTH -> {
+//                    onDefaultPagination()
+//                    binding.dayBeforeYesterdayPaginationImageView.setImageResource(
+//                        R.drawable.swipe_indicator_active
+//                    )
+////                    setPhotoDto(R.drawable.ic_system)
+//                    binding.fotoEarthImageView.setImageResource(R.drawable.ic_system)
+//                }
                 else -> true
             }
         }
@@ -92,20 +98,22 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
                 ImageView.ScaleType.FIT_CENTER
         }
     }
-
+// https://epic.gsfc.nasa.gov/archive/natural/' + year + '/' + month + '/' + day + '/jpg/' + 'IMAGE_NAME+ '.jpg';
 
     private fun setPhotoDto(earthDtoItem: EarthDtoItem) {
-        binding.fotoEarthImageView.setImageResource(R.drawable.ic_earth)
-        earthDtoItem.image
-        if (earthDtoItem.image.isNotBlank()) {
-            Picasso.get()
-                .load(earthDtoItem.image)
-                .fit() // картинка будет размещена по выделенному размеру для нее.
-                .placeholder(R.drawable.uploading_images)
-                .into(binding.fotoEarthImageView)
-            binding.fotoEarthImageView.scaleType =
-                ImageView.ScaleType.FIT_CENTER
-        }
+        val year = earthDtoItem.date?.slice(0..3)
+        val month = earthDtoItem.date?.slice(5..6)
+        val day = earthDtoItem.date?.slice(8..9)
+        val image = earthDtoItem.image
+
+        val url = "https://epic.gsfc.nasa.gov/archive/natural/$year/$month/$day/jpg/$image.jpg"
+
+        Picasso.get()
+            .load(url)
+            .placeholder(R.drawable.uploading_images)
+            .into(binding.fotoEarthImageView)
+        binding.fotoEarthImageView.scaleType =
+            ImageView.ScaleType.FIT_CENTER
     }
 
     private fun onDefaultPagination() {
@@ -120,5 +128,8 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
         private const val TODAY_EARTH = 0
         private const val YESTERDAY_EARTH = 1
         private const val TWO_DATS_AGO_EARTH = 2
+
+        @JvmStatic
+        fun newInstance() = FotoEarthFragment()
     }
 }

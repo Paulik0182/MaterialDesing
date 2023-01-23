@@ -1,12 +1,12 @@
 package com.example.materialdesing.domain.repo
 
-import com.example.materialdesing.domain.entity.earth.EarthDto
+import com.example.materialdesing.domain.entity.earth.EarthDtoItem
 
 interface EarthRepo {
 
-    fun getEarthToday(callback: (List<EarthDto>?) -> Unit)
+    fun getEarthToday(callback: (List<EarthDtoItem>?) -> Unit)
 
-    fun getEarthYesterday(callback: (List<EarthDto>?) -> Unit)
+    fun getEarthYesterday(callback: (List<EarthDtoItem>?) -> Unit)
 
-    fun getEarthTwoDaysAgo(callback: (List<EarthDto>?) -> Unit)
+    fun getEarthTwoDaysAgo(callback: (List<EarthDtoItem>?) -> Unit)
 }

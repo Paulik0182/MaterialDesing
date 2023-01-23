@@ -17,7 +17,7 @@ import com.example.materialdesing.domain.repo.PhotoRepo
 import com.example.materialdesing.utils.toastMake
 import com.squareup.picasso.Picasso
 
-class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description) {
+class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinator) {
 
     private var _binding: FragmentPhotoDescriptionBinding? = null
     private val binding get() = _binding!!
