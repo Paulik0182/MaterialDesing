@@ -22,6 +22,7 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description) {
     private var _binding: FragmentPhotoDescriptionBinding? = null
     private val binding get() = _binding!!
 
+    var flag = true
     private val app: App get() = requireActivity().application as App
 
     private val photoRepo: PhotoRepo by lazy {
@@ -71,7 +72,11 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description) {
         binding.fab.setOnClickListener {
             setPhotoDey()
             binding.todayChip.performClick()
+            flag = !flag
+            binding.inputLayoutChipGroup.visibility = if (flag) View.GONE else View.VISIBLE
         }
+
+        binding.inputLayoutChipGroup.visibility = View.GONE
     }
 
     private fun onClickIcon() {

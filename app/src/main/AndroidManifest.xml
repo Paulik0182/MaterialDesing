@@ -23,8 +23,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.RootActivity"
-            android:exported="true"
-            android:screenOrientation="portrait">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
