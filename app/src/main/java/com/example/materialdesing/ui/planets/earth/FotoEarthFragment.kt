@@ -57,7 +57,6 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
                     binding.todayPaginationImageView.setImageResource(
                         R.drawable.swipe_indicator_active
                     )
-//                    setPhotoDto(R.drawable.ic_earth)
                     viewModel.photoDeyLiveData.observe(viewLifecycleOwner) {
                         setPhotoDto(
                             it.last()
@@ -87,18 +86,6 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
             }
         }
     }
-
-    private fun setPhotoDto(photo: Int) {
-        if (photo != null) {
-            Picasso.get()
-                .load(photo)
-                .placeholder(R.drawable.uploading_images)
-                .into(binding.fotoEarthImageView)
-            binding.fotoEarthImageView.scaleType =
-                ImageView.ScaleType.FIT_CENTER
-        }
-    }
-// https://epic.gsfc.nasa.gov/archive/natural/' + year + '/' + month + '/' + day + '/jpg/' + 'IMAGE_NAME+ '.jpg';
 
     private fun setPhotoDto(earthDtoItem: EarthDtoItem) {
         val year = earthDtoItem.date?.slice(0..3)
