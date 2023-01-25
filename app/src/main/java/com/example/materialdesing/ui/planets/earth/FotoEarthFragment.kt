@@ -44,6 +44,7 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
         _binding = FragmentFotoEarthBinding.bind(view)
 
         adapter = ViewPagerEarthAdapter(this)
+
         setTabs()
     }
 
@@ -52,22 +53,16 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
         adapter.fragments.forEachIndexed { index, _ ->
             when (index) {
                 TODAY_EARTH -> {
-                    Toast.makeText(requireContext(), "0", Toast.LENGTH_SHORT).show()
-                    onDefaultPagination()
-                    binding.todayPaginationImageView.setImageResource(
-                        R.drawable.swipe_indicator_active
-                    )
-                    viewModel.photoDeyLiveData.observe(viewLifecycleOwner) {
+
+                    viewModel.earthLastWeekLiveData.observe(viewLifecycleOwner) {
                         setPhotoDto(
                             it.last()
                         )
                         Toast.makeText(requireContext(), "Привет", Toast.LENGTH_SHORT).show()
                     }
-//                    binding.fotoEarthImageView.setImageResource(R.drawable.ic_earth)
                 }
 //                YESTERDAY_EARTH -> {
 //                    Toast.makeText(requireContext(), "1", Toast.LENGTH_SHORT).show()
-//                    onDefaultPagination()
 //                    binding.yesterdayPaginationImageView.setImageResource(
 //                        R.drawable.swipe_indicator_active
 //                    )
@@ -75,7 +70,6 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
 //                    binding.fotoEarthImageView.setImageResource(R.drawable.ic_mars)
 //                }
 //                TWO_DATS_AGO_EARTH -> {
-//                    onDefaultPagination()
 //                    binding.dayBeforeYesterdayPaginationImageView.setImageResource(
 //                        R.drawable.swipe_indicator_active
 //                    )
@@ -88,6 +82,7 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
     }
 
     private fun setPhotoDto(earthDtoItem: EarthDtoItem) {
+        binding.dateTextView.text = earthDtoItem.date
         val year = earthDtoItem.date?.slice(0..3)
         val month = earthDtoItem.date?.slice(5..6)
         val day = earthDtoItem.date?.slice(8..9)
@@ -101,14 +96,6 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
             .into(binding.fotoEarthImageView)
         binding.fotoEarthImageView.scaleType =
             ImageView.ScaleType.FIT_CENTER
-    }
-
-    private fun onDefaultPagination() {
-        binding.todayPaginationImageView.setImageResource(R.drawable.swipe_indicator_passive)
-        binding.yesterdayPaginationImageView.setImageResource(R.drawable.swipe_indicator_passive)
-        binding.dayBeforeYesterdayPaginationImageView.setImageResource(
-            R.drawable.swipe_indicator_passive
-        )
     }
 
     companion object {

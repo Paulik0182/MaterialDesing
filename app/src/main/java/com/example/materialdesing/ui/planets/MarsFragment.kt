@@ -10,8 +10,8 @@ import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentMarsBinding
 import com.example.materialdesing.domain.repo.EarthRepo
 import com.example.materialdesing.domain.repo.MarsRepo
+import com.example.nasaapp.model.data.MarsServerResponseData
 import com.squareup.picasso.Picasso
-import ru.geekbrains.nasaapi.repository.dto.MarsPhotosServerResponseData
 
 class MarsFragment : Fragment(R.layout.fragment_mars) {
 
@@ -40,14 +40,19 @@ class MarsFragment : Fragment(R.layout.fragment_mars) {
         _biding = FragmentMarsBinding.bind(view)
 
         viewModel.marsLiveData.observe(viewLifecycleOwner) {
-            setPhotoDto(it)
+            setPhotoDto(
+                it.last()
+            )
         }
     }
 
-    private fun setPhotoDto(marsPhoto: MarsPhotosServerResponseData) {
+    private fun setPhotoDto(marsPhoto: MarsServerResponseData) {
+        val image = marsPhoto.imgSrc
 
+        val url =
+            "https://mars.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/03715/opgs/edr/fcam/$image.jpg"
         Picasso.get()
-            .load(marsPhoto.photos.last().imgSrc)
+            .load(image)
             .fit() // картинка будет размещена по выделенному размеру для нее.
             .placeholder(R.drawable.uploading_images)
             .into(binding.fotoMarsImageView)

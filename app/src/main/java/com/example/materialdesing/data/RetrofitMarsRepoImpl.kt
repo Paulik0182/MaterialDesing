@@ -4,13 +4,13 @@ import android.content.Context
 import com.example.materialdesing.domain.repo.MarsRepo
 import com.example.materialdesing.utils.bpDataFormatter
 import com.example.materialdesing.utils.showDebugToast
+import com.example.nasaapp.model.data.MarsServerResponseData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import ru.geekbrains.nasaapi.repository.dto.MarsPhotosServerResponseData
 import java.util.*
 
-private const val DAY_IN_MS = 24 * 60 * 60 * 1000L
+private const val WEEK_IN_MS = (24 * 60 * 60 * 1000L) * 7
 
 class RetrofitMarsRepoImpl(
     private val context: Context,
@@ -18,31 +18,12 @@ class RetrofitMarsRepoImpl(
     private val imdbApi: ImdbApi
 ) : MarsRepo {
 
-    private val today: Long = Calendar.getInstance().timeInMillis
+    private val today: Long = Calendar.getInstance().timeInMillis - WEEK_IN_MS
 
-    private val yesterdayMs = today - DAY_IN_MS
-    private val twoDaysAgoMs = yesterdayMs - DAY_IN_MS
-
-    override fun getMarsToday(callback: (MarsPhotosServerResponseData?) -> Unit) {
-        getMarsByDate(
-            Calendar.getInstance(),
-            callback
-        )
-    }
-
-    override fun getMarsYesterday(callback: (MarsPhotosServerResponseData?) -> Unit) {
+    override fun getMarsLastWeek(callback: (List<MarsServerResponseData>?) -> Unit) {
         getMarsByDate(
             Calendar.getInstance().apply {
-                timeInMillis = yesterdayMs
-            },
-            callback
-        )
-    }
-
-    override fun getMarsTwoDaysAgo(callback: (MarsPhotosServerResponseData?) -> Unit) {
-        getMarsByDate(
-            Calendar.getInstance().apply {
-                timeInMillis = twoDaysAgoMs
+                timeInMillis = today
             },
             callback
         )
@@ -50,15 +31,15 @@ class RetrofitMarsRepoImpl(
 
     private fun getMarsByDate(
         date: Calendar,
-        callback: (MarsPhotosServerResponseData?) -> Unit
+        callback: (List<MarsServerResponseData>?) -> Unit
     ) {
         val dateServerFormat = bpDataFormatter.format(date.time)
 
         imdbApi.getMarsImageByDate(dateServerFormat, apiKey)
-            .enqueue(object : Callback<MarsPhotosServerResponseData> {
+            .enqueue(object : Callback<List<MarsServerResponseData>> {
                 override fun onResponse(
-                    call: Call<MarsPhotosServerResponseData>,
-                    response: Response<MarsPhotosServerResponseData>
+                    call: Call<List<MarsServerResponseData>>,
+                    response: Response<List<MarsServerResponseData>>
                 ) {
                     val body = response.body()
                     if (response.isSuccessful && body != null) {
@@ -68,7 +49,7 @@ class RetrofitMarsRepoImpl(
                     }
                 }
 
-                override fun onFailure(call: Call<MarsPhotosServerResponseData>, t: Throwable) {
+                override fun onFailure(call: Call<List<MarsServerResponseData>>, t: Throwable) {
                     context.showDebugToast(t.message.toString()) // todo только для дебага
                     callback(null)
                 }

@@ -10,7 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-private const val DAY_IN_MS = 24 * 60 * 60 * 1000L
+private const val WEEK_IN_MS = (24 * 60 * 60 * 1000L) * 7
 
 class RetrofitEarthRepoImpl(
     private val context: Context,
@@ -18,12 +18,12 @@ class RetrofitEarthRepoImpl(
     private val imdbApi: ImdbApi
 ) : EarthRepo {
 
-    private val today: Long = Calendar.getInstance().timeInMillis - (DAY_IN_MS * 365)
+    private val today: Long = Calendar.getInstance().timeInMillis - WEEK_IN_MS
 
-    private val yesterdayMs = today - (DAY_IN_MS * 365)
-    private val twoDaysAgoMs = yesterdayMs - (DAY_IN_MS * 365)
+    private val yesterdayMs = today - WEEK_IN_MS
+    private val twoDaysAgoMs = yesterdayMs - WEEK_IN_MS
 
-    override fun getEarthToday(callback: (List<EarthDtoItem>?) -> Unit) {
+    override fun getEarthLastWeek(callback: (List<EarthDtoItem>?) -> Unit) {
         getEarthByDate(
             Calendar.getInstance().apply {
                 timeInMillis = today
@@ -32,7 +32,7 @@ class RetrofitEarthRepoImpl(
         )
     }
 
-    override fun getEarthYesterday(callback: (List<EarthDtoItem>?) -> Unit) {
+    override fun getEarthTwoWeeksAgo(callback: (List<EarthDtoItem>?) -> Unit) {
         getEarthByDate(
             Calendar.getInstance().apply {
                 timeInMillis = yesterdayMs
@@ -41,7 +41,7 @@ class RetrofitEarthRepoImpl(
         )
     }
 
-    override fun getEarthTwoDaysAgo(callback: (List<EarthDtoItem>?) -> Unit) {
+    override fun getEarthThreeWeeksAgo(callback: (List<EarthDtoItem>?) -> Unit) {
         getEarthByDate(
             Calendar.getInstance().apply {
                 timeInMillis = twoDaysAgoMs

@@ -43,7 +43,7 @@ class SystemFragment : Fragment(R.layout.fragment_system) {
     private fun setPhotoDto(earthDtoItem: EarthDtoItem) {
         binding.fotoSystemImageView.setImageResource(R.drawable.ic_earth)
         earthDtoItem.url
-        if (earthDtoItem.url.isNotBlank()) {
+        if (earthDtoItem.url?.isNotBlank() == true) {
             Picasso.get()
                 .load(earthDtoItem.url)
                 .fit() // картинка будет размещена по выделенному размеру для нее.

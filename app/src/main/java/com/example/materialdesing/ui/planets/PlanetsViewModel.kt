@@ -8,7 +8,7 @@ import com.example.materialdesing.domain.entity.earth.EarthDtoItem
 import com.example.materialdesing.domain.repo.EarthRepo
 import com.example.materialdesing.domain.repo.MarsRepo
 import com.example.materialdesing.utils.mutable
-import ru.geekbrains.nasaapi.repository.dto.MarsPhotosServerResponseData
+import com.example.nasaapp.model.data.MarsServerResponseData
 
 class PlanetsViewModel(
     private val earthRepo: EarthRepo,
@@ -23,27 +23,34 @@ class PlanetsViewModel(
     }
 
 
-    val photoDeyLiveData: LiveData<List<EarthDtoItem>> = MutableLiveData()
-    val yesterdayLiveData: LiveData<List<EarthDtoItem>> = MutableLiveData()
-    val twoDaysAgoLiveData: LiveData<List<EarthDtoItem>> = MutableLiveData()
+    val earthLastWeekLiveData: LiveData<List<EarthDtoItem>> = MutableLiveData()
+    val earthTwoWeeksAgoLiveData: LiveData<List<EarthDtoItem>> = MutableLiveData()
+    val earthThreeWeeksAgoLiveData: LiveData<List<EarthDtoItem>> = MutableLiveData()
 
-    val marsLiveData: LiveData<MarsPhotosServerResponseData> = MutableLiveData()
+    val marsLiveData: LiveData<List<MarsServerResponseData>> = MutableLiveData()
 
     init {
-        if (photoDeyLiveData.value == null) {
-            earthRepo.getEarthToday {
-                photoDeyLiveData.mutable().postValue(it)
+        if (earthLastWeekLiveData.value == null) {
+            earthRepo.getEarthLastWeek {
+                earthLastWeekLiveData.mutable().postValue(it)
             }
         }
-//        if (yesterdayLiveData.value == null) {
-//            earthRepo.getEarthYesterday {
-//                yesterdayLiveData.mutable().postValue(it)
-//            }
-//        }
-//        if (marsLiveData.value == null) {
-//            marsRepo.getMarsToday {
-//                marsLiveData.mutable().postValue(it)
-//            }
-//        }
+        if (earthTwoWeeksAgoLiveData.value == null) {
+            earthRepo.getEarthTwoWeeksAgo {
+                earthTwoWeeksAgoLiveData.mutable().postValue(it)
+            }
+        }
+
+        if (earthThreeWeeksAgoLiveData.value == null) {
+            earthRepo.getEarthThreeWeeksAgo {
+                earthThreeWeeksAgoLiveData.mutable().postValue(it)
+            }
+        }
+
+        if (marsLiveData.value == null) {
+            marsRepo.getMarsLastWeek {
+                marsLiveData.mutable().postValue(it)
+            }
+        }
     }
 }

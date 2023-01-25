@@ -29,28 +29,77 @@ class EarthFragment : Fragment(R.layout.fragment_earth) {
                 TODAY_EARTH -> {
                     tab.text = getText(R.string.today).toString()
                     tab.icon = ContextCompat.getDrawable(requireContext(), R.drawable.earth)
-//                    binding.todayPaginationImageView.setImageResource(R.drawable.swipe_indicator_active)
+
+//                    onDefaultPagination()
+//                    binding.todayPaginationImageView.setImageResource(
+//                        R.drawable.swipe_indicator_active
+//                    )
                 }
                 YESTERDAY_EARTH -> {
                     tab.text = getText(R.string.yesterday).toString()
                     tab.icon = ContextCompat.getDrawable(requireContext(), R.drawable.earth)
-//                    binding.yesterdayPaginationImageView.setImageResource(R.drawable.swipe_indicator_active)
 
+//                    onDefaultPagination()
+//                    binding.yesterdayPaginationImageView.setImageResource(
+//                        R.drawable.swipe_indicator_active
+//                    )
                 }
                 TWO_DATS_AGO_EARTH -> {
                     tab.text = getText(R.string.day_before_yesterday).toString()
                     tab.icon = ContextCompat.getDrawable(requireContext(), R.drawable.earth)
-//                    binding.dayBeforeYesterdayPaginationImageView.setImageResource(R.drawable.swipe_indicator_active)
 
+//                    onDefaultPagination()
+//                    binding.dayBeforeYesterdayPaginationImageView.setImageResource(
+//                        R.drawable.swipe_indicator_active
+//                    )
                 }
                 else -> {
                     tab.text = getText(R.string.today).toString()
                     tab.icon = ContextCompat.getDrawable(requireContext(), R.drawable.earth)
-//                    binding.todayPaginationImageView.setImageResource(R.drawable.swipe_indicator_active)
 
+//                    onDefaultPagination()
+//                    binding.todayPaginationImageView.setImageResource(
+//                        R.drawable.swipe_indicator_active
+//                    )
+                }
+            }
+            when (position) {
+                TODAY_EARTH -> {
+                    onDefaultPagination()
+                    binding.todayPaginationImageView.setImageResource(
+                        R.drawable.swipe_indicator_active
+                    )
+                }
+                YESTERDAY_EARTH -> {
+                    onDefaultPagination()
+                    binding.yesterdayPaginationImageView.setImageResource(
+                        R.drawable.swipe_indicator_active
+                    )
+
+                }
+                TWO_DATS_AGO_EARTH -> {
+                    onDefaultPagination()
+                    binding.dayBeforeYesterdayPaginationImageView.setImageResource(
+                        R.drawable.swipe_indicator_active
+                    )
+
+                }
+                else -> {
+                    onDefaultPagination()
+                    binding.todayPaginationImageView.setImageResource(
+                        R.drawable.swipe_indicator_active
+                    )
                 }
             }
         }.attach() // вызов медиатора
+    }
+
+    private fun onDefaultPagination() {
+        binding.todayPaginationImageView.setImageResource(R.drawable.swipe_indicator_passive)
+        binding.yesterdayPaginationImageView.setImageResource(R.drawable.swipe_indicator_passive)
+        binding.dayBeforeYesterdayPaginationImageView.setImageResource(
+            R.drawable.swipe_indicator_passive
+        )
     }
 
     companion object {

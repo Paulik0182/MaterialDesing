@@ -4,9 +4,9 @@ import com.example.materialdesing.domain.entity.earth.EarthDtoItem
 
 interface EarthRepo {
 
-    fun getEarthToday(callback: (List<EarthDtoItem>?) -> Unit)
+    fun getEarthLastWeek(callback: (List<EarthDtoItem>?) -> Unit)
 
-    fun getEarthYesterday(callback: (List<EarthDtoItem>?) -> Unit)
+    fun getEarthTwoWeeksAgo(callback: (List<EarthDtoItem>?) -> Unit)
 
-    fun getEarthTwoDaysAgo(callback: (List<EarthDtoItem>?) -> Unit)
+    fun getEarthThreeWeeksAgo(callback: (List<EarthDtoItem>?) -> Unit)
 }
