@@ -5,24 +5,24 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.materialdesing.R
-import com.example.materialdesing.databinding.FragmentSettingsBinding
+import com.example.materialdesing.databinding.FragmentSettingsStartBinding
 
-class SettingsFragment : Fragment(R.layout.fragment_settings) {
+class SettingsFragment : Fragment(R.layout.fragment_settings_start) {
 
-    private var _binding: FragmentSettingsBinding? = null
+    private var _binding: FragmentSettingsStartBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentSettingsBinding.bind(view)
+        _binding = FragmentSettingsStartBinding.bind(view)
 
         binding.aboutAppButton.setOnClickListener {
-            getController().openAboutApp()
+//            getController().openAboutApp()
         }
 
         binding.personalizationAppStylesButton.setOnClickListener {
-            getController().openPersonalizationAppStyles()
+//            getController().openPersonalizationAppStyles()
         }
     }
 

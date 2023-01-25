@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@layout/fragment_settings_end"
+        app:constraintSetStart="@layout/fragment_settings_start"
+        app:duration="2000">
+        <OnClick app:targetId="@+id/personalization_app_styles_button" />
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@layout/fragment_settings_start"
+        app:constraintSetStart="@layout/fragment_settings_end"
+        app:duration="2000">
+        <OnClick app:targetId="@+id/about_app_button" />
+    </Transition>
+</MotionScene>
