@@ -40,7 +40,6 @@
                     android:id="@+id/foto_earth_image_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:layout_behavior=".ui.planets.earth.ViewBehavior"
                     app:srcCompat="@drawable/ic_earth" />
 
                 <androidx.appcompat.widget.Toolbar

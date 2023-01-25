@@ -46,6 +46,10 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth_coordinator) {
         adapter = ViewPagerEarthAdapter(this)
 
         setTabs()
+
+// способ прописать behavior в коде
+//        (binding.freeTextTextView.layoutParams as CoordinatorLayout.LayoutParams).behavior =
+//            ViewBehavior(requireContext())
     }
 
     private fun setTabs() {

@@ -18,11 +18,13 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         _binding = FragmentSettingsBinding.bind(view)
 
         binding.aboutAppButton.setOnClickListener {
-//            getController().openAboutApp()
+//            Handler(Looper.getMainLooper()).postDelayed({
+            getController().openAboutApp()
+//            },3_000)
         }
 
         binding.personalizationAppStylesButton.setOnClickListener {
-//            getController().openPersonalizationAppStyles()
+            getController().openPersonalizationAppStyles()
         }
     }
 
