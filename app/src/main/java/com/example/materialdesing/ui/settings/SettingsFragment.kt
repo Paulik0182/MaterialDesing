@@ -5,17 +5,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.materialdesing.R
-import com.example.materialdesing.databinding.FragmentSettingsStartBinding
+import com.example.materialdesing.databinding.FragmentSettingsBinding
 
-class SettingsFragment : Fragment(R.layout.fragment_settings_start) {
+class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
-    private var _binding: FragmentSettingsStartBinding? = null
+    private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentSettingsStartBinding.bind(view)
+        _binding = FragmentSettingsBinding.bind(view)
 
         binding.aboutAppButton.setOnClickListener {
 //            getController().openAboutApp()
