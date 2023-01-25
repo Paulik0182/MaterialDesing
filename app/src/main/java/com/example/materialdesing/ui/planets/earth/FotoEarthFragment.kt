@@ -8,16 +8,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.materialdesing.App
 import com.example.materialdesing.R
-import com.example.materialdesing.databinding.FragmentFotoEarthBinding
+import com.example.materialdesing.databinding.FragmentFotoEarthCoordinatorBinding
 import com.example.materialdesing.domain.entity.earth.EarthDtoItem
 import com.example.materialdesing.domain.repo.EarthRepo
 import com.example.materialdesing.domain.repo.MarsRepo
 import com.example.materialdesing.ui.planets.PlanetsViewModel
 import com.squareup.picasso.Picasso
 
-class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
+class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth_coordinator) {
 
-    private var _binding: FragmentFotoEarthBinding? = null
+    private var _binding: FragmentFotoEarthCoordinatorBinding? = null
     private val binding get() = _binding!!
 
     private val app: App get() = requireActivity().application as App
@@ -41,7 +41,7 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentFotoEarthBinding.bind(view)
+        _binding = FragmentFotoEarthCoordinatorBinding.bind(view)
 
         adapter = ViewPagerEarthAdapter(this)
 
@@ -83,6 +83,8 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth) {
 
     private fun setPhotoDto(earthDtoItem: EarthDtoItem) {
         binding.dateTextView.text = earthDtoItem.date
+        binding.captionTextView.text = earthDtoItem.caption
+        binding.freeTextTextView.text = getText(R.string.free_text_about_earth).toString()
         val year = earthDtoItem.date?.slice(0..3)
         val month = earthDtoItem.date?.slice(5..6)
         val day = earthDtoItem.date?.slice(8..9)

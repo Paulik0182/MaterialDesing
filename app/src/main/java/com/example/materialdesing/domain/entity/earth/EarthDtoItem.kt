@@ -12,8 +12,8 @@ data class EarthDtoItem(
 
 //    @SerializedName("attitude_quaternions")
 //    val attitudeQuaternions: AttitudeQuaternions,
-//    @SerializedName("caption")
-//    val caption: String,
+    @SerializedName("caption")
+    val caption: String,
 //    @SerializedName("centroid_coordinates")
 //    val centroidCoordinates: CentroidCoordinates,
 //    @SerializedName("coords")

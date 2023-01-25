@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.materialdesing.App
 import com.example.materialdesing.R
-import com.example.materialdesing.databinding.FragmentPhotoDescriptionBinding
+import com.example.materialdesing.databinding.FragmentPhotoDescriptionCoordinatorBinding
 import com.example.materialdesing.domain.entity.PhotoDto
 import com.example.materialdesing.domain.repo.PhotoRepo
 import com.example.materialdesing.utils.toastMake
@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso
 
 class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinator) {
 
-    private var _binding: FragmentPhotoDescriptionBinding? = null
+    private var _binding: FragmentPhotoDescriptionCoordinatorBinding? = null
     private val binding get() = _binding!!
 
     var flag = true
@@ -38,7 +38,7 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentPhotoDescriptionBinding.bind(view)
+        _binding = FragmentPhotoDescriptionCoordinatorBinding.bind(view)
 
         onClickIcon()
 
