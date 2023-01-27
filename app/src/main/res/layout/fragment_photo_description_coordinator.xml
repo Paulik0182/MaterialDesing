@@ -67,13 +67,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_chip_group"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/barrier"
-                app:singleLine="true"
                 app:layout_constraintWidth_percent="0.8"
+                app:singleLine="true"
                 app:singleSelection="true"
                 tools:ignore="MissingConstraints">
 
@@ -112,40 +112,75 @@
             android:gravity="center"
             android:scaleType="fitXY" />
 
-        <TextView
-            android:id="@+id/date_text_view"
-            style="@style/default_text_view_style"
-            android:textSize="?attr/big_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/anagram_allfont_ru" />
-
-        <TextView
-            android:id="@+id/title_text_view"
-            style="@style/default_text_view_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/caveat_variable_font_wght_ru" />
-
-        <ScrollView
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bottom_sheet_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:background="#f6f6fa"
+                app:behavior_hideable="true"
+                app:behavior_peekHeight="90dp"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+                <View
+                    android:id="@+id/bottom_sheet_line"
+                    android:layout_width="25dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#663b4351"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/explanation_text_view"
+                    android:id="@+id/date_text_view"
                     style="@style/default_text_view_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/playfair_display_bold_allfont_ru" />
+                    android:fontFamily="@font/anagram_allfont_ru"
+                    android:textSize="?attr/big_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_line" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/title_text_view"
+                    style="@style/default_text_view_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/caveat_variable_font_wght_ru"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/date_text_view" />
 
-        </ScrollView>
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_text_view">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/explanation_text_view"
+                            style="@style/default_text_view_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/playfair_display_bold_allfont_ru" />
+
+                    </LinearLayout>
+
+                </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Group

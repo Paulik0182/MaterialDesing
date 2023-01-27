@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/personalization_app_styles_button"
+            style="@style/button_settings_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_style_24"
+            android:text="@string/personalization_app"
+            app:backgroundTint="?attr/button_background"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal_top_guide_line"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_centre_guide_line"
+            app:layout_constraintStart_toStartOf="@+id/vertical_centre_guide_line"
+            app:layout_constraintTop_toTopOf="@id/horizontal_top_guide_line" />
+
+        <Constraint
+            android:id="@+id/about_app_button"
+            style="@style/button_settings_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_baseline_receipt_long_24"
+            android:text="@string/about_app"
+            app:backgroundTint="?attr/button_background"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal_centre_guide_line"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_centre_guide_line"
+            app:layout_constraintStart_toStartOf="@+id/vertical_centre_guide_line"
+            app:layout_constraintTop_toTopOf="@id/horizontal_centre_guide_line" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            style="@style/button_settings_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_style_24"
+            android:text="@string/personalization_app"
+            app:backgroundTint="?attr/button_background"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal_centre_guide_line"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_centre_guide_line"
+            app:layout_constraintStart_toStartOf="@+id/vertical_centre_guide_line"
+            app:layout_constraintTop_toTopOf="@id/horizontal_centre_guide_line" />
+
+        <Constraint
+            android:id="@+id/about_app_button"
+            style="@style/button_settings_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_baseline_receipt_long_24"
+            android:text="@string/about_app"
+            app:backgroundTint="?attr/button_background"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal_top_guide_line"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_centre_guide_line"
+            app:layout_constraintStart_toStartOf="@+id/vertical_centre_guide_line"
+            app:layout_constraintTop_toTopOf="@id/horizontal_top_guide_line" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@id/start"
+        app:duration="2000">
+        <OnClick app:targetId="@+id/personalization_app_styles_button" />
+    </Transition>
+
+</MotionScene>

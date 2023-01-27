@@ -29,7 +29,9 @@ class RetrofitPhotoRepoImpl(
 
     override fun getPhotoToday(callback: (PhotoDto?) -> Unit) {
         getPhotoByDate(
-            Calendar.getInstance(),
+            Calendar.getInstance().apply {
+                timeInMillis = today
+            },
             callback
         )
     }

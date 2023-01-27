@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.materialdesing.R
 import com.example.materialdesing.databinding.ActivityRootBinding
 import com.example.materialdesing.ui.nasa.PhotoDeyFragment
-import com.example.materialdesing.ui.navigation.BarViewActivity
+import com.example.materialdesing.ui.planets.earth.BarViewActivity
 import com.example.materialdesing.ui.settings.AboutAppFragment
 import com.example.materialdesing.ui.settings.SettingsFragment
 import com.example.materialdesing.ui.settings.personalization.PersonalizationAppStylesFragment
