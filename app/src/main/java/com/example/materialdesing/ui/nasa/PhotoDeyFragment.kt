@@ -3,12 +3,17 @@ package com.example.materialdesing.ui.nasa
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.transition.ChangeBounds
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import com.example.materialdesing.App
 import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentPhotoDescriptionCoordinatorBinding
@@ -70,10 +75,26 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         }
 
         binding.fab.setOnClickListener {
-            setPhotoDey()
-            binding.todayChip.performClick()
+//            setPhotoDey() // возврат на сегодняшний день
+
             flag = !flag
+
+            // Все должно быть из androidX. Проверять если будет ругатся
+            val myAutoTransition =
+                TransitionSet()// состоит из нескольких параметров, поэтому TransitionSet
+//            myAutoTransition.ordering = TransitionSet.ORDERING_SEQUENTIAL
+            myAutoTransition.ordering = TransitionSet.ORDERING_TOGETHER
+//            val fade = Hold()
+            val fade = Slide(Gravity.BOTTOM)
+            fade.duration = 1_000L
+            val changeBounds = ChangeBounds()
+            changeBounds.duration = 1_000L
+            myAutoTransition.addTransition(changeBounds)
+            myAutoTransition.addTransition(fade)
+            TransitionManager.beginDelayedTransition(binding.transitionsContainer, myAutoTransition)
+
             binding.inputLayoutChipGroup.visibility = if (flag) View.GONE else View.VISIBLE
+//            binding.todayChip.performClick() // устанавливаем отметку нажатия
         }
 
         binding.inputLayoutChipGroup.visibility = View.GONE
