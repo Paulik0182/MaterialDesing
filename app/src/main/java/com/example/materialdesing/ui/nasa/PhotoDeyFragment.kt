@@ -3,8 +3,11 @@ package com.example.materialdesing.ui.nasa
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -27,6 +30,7 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
 
     private var flagVisible = true
     private var flagApproximationImage = true
+    private var positionButtonFab = true
 
     private val app: App get() = requireActivity().application as App
 
@@ -74,9 +78,16 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
             context?.toastMake("Позавчера")
         }
 
-        binding.fab.setOnClickListener {
-//            setPhotoDey() // возврат на сегодняшний день
+        binding.inputLayoutChipGroup.visibility = View.GONE
 
+        setApproximationImage()
+
+        actionСlickingOnFab()
+    }
+
+    private fun actionСlickingOnFab() {
+        binding.fab.setOnClickListener {
+            // setPhotoDey() // возврат на сегодняшний день
             flagVisible = !flagVisible
 
             // Все должно быть из androidX. Проверять если будет ругатся
@@ -95,10 +106,23 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
 
             binding.inputLayoutChipGroup.visibility = if (flagVisible) View.GONE else View.VISIBLE
 //            binding.todayChip.performClick() // устанавливаем отметку нажатия
-        }
-        binding.inputLayoutChipGroup.visibility = View.GONE
 
-        setApproximationImage()
+            Handler(Looper.getMainLooper()).postDelayed({
+                // Движение Fab
+                positionButtonFab = !positionButtonFab
+                val params = it.layoutParams as FrameLayout.LayoutParams
+                val changeBoundsFab = ChangeBounds()
+                changeBoundsFab.duration = 2000L
+                changeBoundsFab.setPathMotion(ArcMotion())
+                TransitionManager.beginDelayedTransition(binding.root, changeBoundsFab)
+                if (positionButtonFab) {
+                    params.gravity = Gravity.END or Gravity.BOTTOM
+                } else {
+                    params.gravity = Gravity.START or Gravity.BOTTOM
+                }
+                binding.fab.layoutParams = params
+            }, 1_002)
+        }
     }
 
     // Приближение (увеличение) картинки по нажатию на нее
@@ -139,7 +163,6 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
                 params.height = LinearLayout.LayoutParams.MATCH_PARENT
                 binding.photoDeyImageView.scaleType = ImageView.ScaleType.CENTER_CROP
             } else {
-
                 params.height = LinearLayout.LayoutParams.WRAP_CONTENT
                 binding.photoDeyImageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
             }
