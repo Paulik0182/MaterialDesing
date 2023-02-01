@@ -96,7 +96,6 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
             binding.inputLayoutChipGroup.visibility = if (flag) View.GONE else View.VISIBLE
 //            binding.todayChip.performClick() // устанавливаем отметку нажатия
         }
-
         binding.inputLayoutChipGroup.visibility = View.GONE
     }
 
