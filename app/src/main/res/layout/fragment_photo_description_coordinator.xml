@@ -111,9 +111,10 @@
             android:layout_margin="@dimen/default_layout_margin"
             android:adjustViewBounds="true"
             android:gravity="center"
-            android:scaleType="fitXY" />
+            android:scaleType="centerInside" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinator_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

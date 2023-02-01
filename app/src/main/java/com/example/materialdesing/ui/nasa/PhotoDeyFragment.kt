@@ -6,14 +6,12 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.transition.ChangeBounds
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
-import androidx.transition.TransitionSet
+import androidx.transition.*
 import com.example.materialdesing.App
 import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentPhotoDescriptionCoordinatorBinding
@@ -27,7 +25,9 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
     private var _binding: FragmentPhotoDescriptionCoordinatorBinding? = null
     private val binding get() = _binding!!
 
-    var flag = true
+    private var flagVisible = true
+    private var flagApproximationImage = true
+
     private val app: App get() = requireActivity().application as App
 
     private val photoRepo: PhotoRepo by lazy {
@@ -77,7 +77,7 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         binding.fab.setOnClickListener {
 //            setPhotoDey() // возврат на сегодняшний день
 
-            flag = !flag
+            flagVisible = !flagVisible
 
             // Все должно быть из androidX. Проверять если будет ругатся
             val myAutoTransition =
@@ -93,11 +93,60 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
             myAutoTransition.addTransition(fade)
             TransitionManager.beginDelayedTransition(binding.transitionsContainer, myAutoTransition)
 
-            binding.inputLayoutChipGroup.visibility = if (flag) View.GONE else View.VISIBLE
+            binding.inputLayoutChipGroup.visibility = if (flagVisible) View.GONE else View.VISIBLE
 //            binding.todayChip.performClick() // устанавливаем отметку нажатия
         }
         binding.inputLayoutChipGroup.visibility = View.GONE
+
+        setApproximationImage()
     }
+
+    // Приближение (увеличение) картинки по нажатию на нее
+    private fun setApproximationImage() {
+        binding.photoDeyImageView.setOnClickListener {
+            flagApproximationImage = !flagApproximationImage
+
+            // плавное сокрытие элементов
+            val myAutoTransition =
+                TransitionSet()// состоит из нескольких параметров, поэтому TransitionSet
+//            myAutoTransition.ordering = TransitionSet.ORDERING_SEQUENTIAL
+            myAutoTransition.ordering = TransitionSet.ORDERING_TOGETHER
+//            val fade = Hold()
+            val fade = Slide(Gravity.BOTTOM)
+            fade.duration = 2_000L
+            val changeBounds1 = ChangeBounds()
+            changeBounds1.duration = 2_000L
+            myAutoTransition.addTransition(changeBounds1)
+            myAutoTransition.addTransition(fade)
+            TransitionManager.beginDelayedTransition(binding.transitionsContainer, myAutoTransition)
+            binding.coordinatorLayout.visibility =
+                if (flagApproximationImage) View.GONE else View.VISIBLE
+
+            // Приближение (увеличение) картинки
+            val params = it.layoutParams as LinearLayout.LayoutParams
+            val transitionSet = TransitionSet()
+            val changeImageTransform = ChangeImageTransform()
+            val changeBounds = ChangeBounds()
+            changeBounds.duration = 2000L
+            changeImageTransform.duration = 2000L
+
+            transitionSet.ordering = TransitionSet.ORDERING_TOGETHER
+            transitionSet.addTransition(changeBounds)// важен порядок, обязетельно changeImageTransform после changeBounds
+            transitionSet.addTransition(changeImageTransform)
+
+            TransitionManager.beginDelayedTransition(binding.root, transitionSet)
+            if (flagApproximationImage) {
+                params.height = LinearLayout.LayoutParams.MATCH_PARENT
+                binding.photoDeyImageView.scaleType = ImageView.ScaleType.CENTER_CROP
+            } else {
+
+                params.height = LinearLayout.LayoutParams.WRAP_CONTENT
+                binding.photoDeyImageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+            }
+            binding.photoDeyImageView.layoutParams = params
+        }
+    }
+
 
     private fun onClickIcon() {
         binding.inputLayout.setEndIconOnClickListener {
@@ -106,9 +155,7 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
                 data =
                     Uri.parse(
                         "https://en.wikipedia.org/wiki/" +
-                                "${
-                                    binding.inputEditText.text.toString()
-                                }"
+                                binding.inputEditText.text.toString()
                     )
             })
         }
@@ -130,8 +177,6 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
                 .load(photoDto.url)
                 .placeholder(R.drawable.uploading_images)
                 .into(binding.photoDeyImageView)
-            binding.photoDeyImageView.scaleType =
-                ImageView.ScaleType.FIT_CENTER
         }
     }
 
