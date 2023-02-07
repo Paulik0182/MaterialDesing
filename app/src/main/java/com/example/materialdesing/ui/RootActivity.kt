@@ -9,7 +9,8 @@ import com.example.materialdesing.R
 import com.example.materialdesing.databinding.ActivityRootBinding
 import com.example.materialdesing.ui.nasa.PhotoDeyFragment
 import com.example.materialdesing.ui.planets.earth.BarViewActivity
-import com.example.materialdesing.ui.recycler.RecyclerFragment
+import com.example.materialdesing.ui.recycler.RootRecyclerFragment
+import com.example.materialdesing.ui.recycler.different.RecyclerFragment
 import com.example.materialdesing.ui.settings.AboutAppFragment
 import com.example.materialdesing.ui.settings.SettingsFragment
 import com.example.materialdesing.ui.settings.personalization.PersonalizationAppStylesFragment
@@ -18,7 +19,8 @@ private const val TAG_ROOT_CONTAINER_LAYOUT_KEY = "TAG_ROOT_CONTAINER_LAYOUT_KEY
 
 class RootActivity : AppCompatActivity(),
     SettingsFragment.Controller,
-    PersonalizationAppStylesFragment.Controller {
+    PersonalizationAppStylesFragment.Controller,
+    RootRecyclerFragment.Controller {
 
     private lateinit var binding: ActivityRootBinding
 
@@ -53,7 +55,7 @@ class RootActivity : AppCompatActivity(),
                     swapFragment(SettingsFragment())
                 }
                 R.id.list_recycler_view -> {
-                    swapFragment(RecyclerFragment())
+                    swapFragment(RootRecyclerFragment())
                 }
                 R.id.app_bar_bottom_navigation -> {
                     val intent = Intent(this, BarViewActivity::class.java)
@@ -92,12 +94,25 @@ class RootActivity : AppCompatActivity(),
             .commit()
     }
 
+    private fun onTypesItems() {
+        val fragment: Fragment = RecyclerFragment.newInstance()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.fragmentContainerFrameLayout.id, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     override fun openAboutApp() {
         onAboutApp()
     }
 
     override fun openPersonalizationAppStyles() {
         onPersonalizationAppStyles()
+    }
+
+    override fun openTypesItems() {
+        onTypesItems()
     }
 
 

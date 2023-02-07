@@ -43,7 +43,11 @@
     <string name="weather_tab_text">Weather</string>
     <string name="exit_tab_text">Exit</string>
     <string name="planets">Планеты</string>
+
+    <!-- Для списка с примерами RecyclerView -->
+    <string name="title_lists">Примеры RecyclerView</string>
     <string name="list">Список</string>
+    <string name="different_types_items">Разные типы ItemType</string>
 
     <!-- Рассказ о Земле -->
     <string name="free_text_about_earth">Земля́ — третья по удалённости от Солнца планета
