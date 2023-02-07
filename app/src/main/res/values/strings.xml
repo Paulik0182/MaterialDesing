@@ -43,6 +43,7 @@
     <string name="weather_tab_text">Weather</string>
     <string name="exit_tab_text">Exit</string>
     <string name="planets">Планеты</string>
+    <string name="list">Список</string>
 
     <!-- Рассказ о Земле -->
     <string name="free_text_about_earth">Земля́ — третья по удалённости от Солнца планета

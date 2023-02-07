@@ -9,6 +9,7 @@ import com.example.materialdesing.R
 import com.example.materialdesing.databinding.ActivityRootBinding
 import com.example.materialdesing.ui.nasa.PhotoDeyFragment
 import com.example.materialdesing.ui.planets.earth.BarViewActivity
+import com.example.materialdesing.ui.recycler.RecyclerFragment
 import com.example.materialdesing.ui.settings.AboutAppFragment
 import com.example.materialdesing.ui.settings.SettingsFragment
 import com.example.materialdesing.ui.settings.personalization.PersonalizationAppStylesFragment
@@ -50,6 +51,9 @@ class RootActivity : AppCompatActivity(),
                 }
                 R.id.settings_item -> {
                     swapFragment(SettingsFragment())
+                }
+                R.id.list_recycler_view -> {
+                    swapFragment(RecyclerFragment())
                 }
                 R.id.app_bar_bottom_navigation -> {
                     val intent = Intent(this, BarViewActivity::class.java)
