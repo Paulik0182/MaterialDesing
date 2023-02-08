@@ -14,17 +14,17 @@ import com.example.materialdesing.domain.interactor.AddItemInteractor
 import com.example.materialdesing.domain.interactor.RemoveItemInteractor
 
 class RecyclerChangeAdapter(
-    private var listData: List<EntityTypeItems>,
+    private var listData: MutableList<EntityTypeItems>,
     val addItemInteractor: AddItemInteractor,
     val removeItemInteractor: RemoveItemInteractor
 ) : RecyclerView.Adapter<RecyclerChangeAdapter.BaseViewHolder>() {
 
-    fun setListDataRemove(listEntityTypeItemsNew: List<EntityTypeItems>, position: Int) {
+    fun setListDataRemove(listEntityTypeItemsNew: MutableList<EntityTypeItems>, position: Int) {
         listData = listEntityTypeItemsNew
         notifyItemRemoved(position) // анимированное действие с элементом
     }
 
-    fun setListDataAdd(listEntityTypeItemsNew: List<EntityTypeItems>, position: Int) {
+    fun setListDataAdd(listEntityTypeItemsNew: MutableList<EntityTypeItems>, position: Int) {
         listData = listEntityTypeItemsNew
         notifyItemInserted(position) // анимированное действие с элементом
     }
@@ -92,6 +92,33 @@ class RecyclerChangeAdapter(
             binding.removeItemImageView.setOnClickListener {
                 removeItemInteractor.remove(layoutPosition)
             }
+
+
+            /**
+             * перемещение объекта по списку (1 - удаляем объект с экрана. 2 - добавляем объект на экран)
+             */
+            binding.moveItemUp.setOnClickListener {
+                if (layoutPosition != 1) {
+                    listData.removeAt(layoutPosition).apply {
+                        listData.add(layoutPosition - 1, this)
+                    }
+                    notifyItemMoved(layoutPosition, layoutPosition - 1) // отресовка на экране
+                } else {
+                    Unit
+                }
+            }
+
+            binding.moveItemDown.setOnClickListener {
+                val elementLast = listData.size - 1
+                if (layoutPosition != elementLast) {
+                    listData.removeAt(layoutPosition).apply {
+                        listData.add(layoutPosition + 1, this)
+                    }
+                    notifyItemMoved(layoutPosition, layoutPosition + 1) // отресовка на экране
+                } else {
+                    Unit
+                }
+            }
         }
     }
 
@@ -111,6 +138,30 @@ class RecyclerChangeAdapter(
             }
             binding.removeItemImageView.setOnClickListener {
                 removeItemInteractor.remove(layoutPosition)
+            }
+
+            /**
+             * перемещение объекта по списку (1 - удаляем объект с экрана. 2 - добавляем объект на экран)
+             */
+            binding.moveItemUp.setOnClickListener {
+                if (layoutPosition != 1) {
+                    listData.removeAt(layoutPosition).apply {
+                        listData.add(layoutPosition - 1, this)
+                    }
+                    notifyItemMoved(layoutPosition, layoutPosition - 1) // отресовка на экране
+                } else UInt
+            }
+
+            binding.moveItemDown.setOnClickListener {
+                val elementLast = listData.size - 1
+                if (layoutPosition != elementLast) {
+                    listData.removeAt(layoutPosition).apply {
+                        listData.add(layoutPosition + 1, this)
+                    }
+                    notifyItemMoved(layoutPosition, layoutPosition + 1) // отресовка на экране
+                } else {
+                    Unit
+                }
             }
         }
     }
