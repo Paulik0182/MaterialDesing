@@ -1,6 +1,7 @@
 package com.example.materialdesing.ui.recycler.different
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.materialdesing.databinding.FragmentRecyclerItemEarthBinding
@@ -12,7 +13,7 @@ import com.example.materialdesing.ui.recycler.TYPE_MARS
 
 class RecyclerAdapter(
     private val listData: List<Data>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>() {
 
 
     // определяем на какой позиции кто должен находится (у нас пример из трех item)
@@ -27,7 +28,7 @@ class RecyclerAdapter(
      *  разметку свой ViewHolder
      */
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
             TYPE_EARTH -> {
                 val binding =
@@ -52,18 +53,8 @@ class RecyclerAdapter(
      * getItemViewType(position) - вызывается в любом месте адаптера (вызов по позиции)
      * То-есть узнаем позицию и в зависимости от результата поразному обработать
      */
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (getItemViewType(position)) {
-            TYPE_EARTH -> {
-                (holder as EarthViewHolder).bind(listData[position])
-            }
-            TYPE_MARS -> {
-                (holder as MarsViewHolder).bind(listData[position])
-            }
-            else -> {
-                (holder as HeaderViewHolder).bind(listData[position])
-            }
-        }
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        holder.bind(listData[position])
     }
 
     override fun getItemCount() = listData.size
@@ -72,23 +63,28 @@ class RecyclerAdapter(
      * под каждую разметку (layour) создаем свой ViewHolder
      */
     class HeaderViewHolder(val binding: FragmentRecyclerItemHeaderBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Data) {
+        BaseViewHolder(binding.root) {
+        override fun bind(data: Data) {
             binding.name.text = data.name
         }
     }
 
     class EarthViewHolder(val binding: FragmentRecyclerItemEarthBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Data) {
+        BaseViewHolder(binding.root) {
+        override fun bind(data: Data) {
             binding.name.text = data.name
         }
     }
 
     class MarsViewHolder(val binding: FragmentRecyclerItemMarsBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Data) {
+        BaseViewHolder(binding.root) {
+        override fun bind(data: Data) {
             binding.name.text = data.name
         }
+    }
+
+    abstract class BaseViewHolder(view: View) :
+        RecyclerView.ViewHolder(view) {
+        abstract fun bind(data: Data)
     }
 }
