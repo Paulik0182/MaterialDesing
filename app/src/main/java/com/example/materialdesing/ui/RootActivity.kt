@@ -10,6 +10,7 @@ import com.example.materialdesing.databinding.ActivityRootBinding
 import com.example.materialdesing.ui.nasa.PhotoDeyFragment
 import com.example.materialdesing.ui.planets.earth.BarViewActivity
 import com.example.materialdesing.ui.recycler.RootRecyclerFragment
+import com.example.materialdesing.ui.recycler.change.RecyclerChangeFragment
 import com.example.materialdesing.ui.recycler.different.RecyclerFragment
 import com.example.materialdesing.ui.settings.AboutAppFragment
 import com.example.materialdesing.ui.settings.SettingsFragment
@@ -103,6 +104,15 @@ class RootActivity : AppCompatActivity(),
             .commit()
     }
 
+    private fun onRecyclerChange() {
+        val fragment: Fragment = RecyclerChangeFragment.newInstance()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.fragmentContainerFrameLayout.id, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     override fun openAboutApp() {
         onAboutApp()
     }
@@ -113,6 +123,10 @@ class RootActivity : AppCompatActivity(),
 
     override fun openTypesItems() {
         onTypesItems()
+    }
+
+    override fun openRecyclerChange() {
+        onRecyclerChange()
     }
 
 

@@ -72,4 +72,17 @@
         app:layout_constraintStart_toStartOf="@+id/vertical_centre_guide_line"
         app:layout_constraintTop_toTopOf="@id/horizontal_centre_guide_line" />
 
+    <Button
+        android:id="@+id/recycler_change_button"
+        style="@style/button_settings_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_baseline_receipt_long_24"
+        android:text="@string/recycler_change_items"
+        app:backgroundTint="?attr/button_background"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal_bottom_guide_line"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_centre_guide_line"
+        app:layout_constraintStart_toStartOf="@+id/vertical_centre_guide_line"
+        app:layout_constraintTop_toTopOf="@id/horizontal_bottom_guide_line" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

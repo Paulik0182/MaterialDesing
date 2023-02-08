@@ -20,10 +20,15 @@ class RootRecyclerFragment : Fragment(R.layout.fragment_root_recyler) {
         binding.typesItemsButton.setOnClickListener {
             getController().openTypesItems()
         }
+
+        binding.recyclerChangeButton.setOnClickListener {
+            getController().openRecyclerChange()
+        }
     }
 
     interface Controller {
         fun openTypesItems()
+        fun openRecyclerChange()
     }
 
     private fun getController(): Controller = activity as Controller
