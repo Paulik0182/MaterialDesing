@@ -47,9 +47,23 @@ class RecyclerAdapter(
         }
     }
 
-    // здесь связываем контейнер с контентом конкретног элемента
+    /**
+     * здесь связываем контейнер с контентом конкретног элемента
+     * getItemViewType(position) - вызывается в любом месте адаптера (вызов по позиции)
+     * То-есть узнаем позицию и в зависимости от результата поразному обработать
+     */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        //TODO("Not yet implemented")
+        when (getItemViewType(position)) {
+            TYPE_EARTH -> {
+                (holder as EarthViewHolder).bind(listData[position])
+            }
+            TYPE_MARS -> {
+                (holder as MarsViewHolder).bind(listData[position])
+            }
+            else -> {
+                (holder as HeaderViewHolder).bind(listData[position])
+            }
+        }
     }
 
     override fun getItemCount() = listData.size
@@ -59,16 +73,22 @@ class RecyclerAdapter(
      */
     class HeaderViewHolder(val binding: FragmentRecyclerItemHeaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
+        fun bind(data: Data) {
+            binding.name.text = data.name
+        }
     }
 
     class EarthViewHolder(val binding: FragmentRecyclerItemEarthBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
+        fun bind(data: Data) {
+            binding.name.text = data.name
+        }
     }
 
     class MarsViewHolder(val binding: FragmentRecyclerItemMarsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
+        fun bind(data: Data) {
+            binding.name.text = data.name
+        }
     }
 }
