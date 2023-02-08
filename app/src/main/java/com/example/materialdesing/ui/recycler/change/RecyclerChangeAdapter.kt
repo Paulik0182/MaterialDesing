@@ -7,27 +7,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.materialdesing.databinding.FragmentRecyclerChangeItemEarthBinding
 import com.example.materialdesing.databinding.FragmentRecyclerChangeItemHeaderBinding
 import com.example.materialdesing.databinding.FragmentRecyclerChangeItemMarsBinding
+import com.example.materialdesing.domain.entity.EntityTypeItems
+import com.example.materialdesing.domain.entity.TYPE_EARTH
+import com.example.materialdesing.domain.entity.TYPE_MARS
+import com.example.materialdesing.domain.interactor.AddItemInteractor
 import com.example.materialdesing.domain.interactor.RemoveItemInteractor
-import com.example.materialdesing.ui.recycler.Data
-import com.example.materialdesing.ui.recycler.TYPE_EARTH
-import com.example.materialdesing.ui.recycler.TYPE_MARS
 
 class RecyclerChangeAdapter(
-    private var listData: MutableList<Data>,
-//    val addItemInteractor: AddItemInteractor,
+    private var listData: List<EntityTypeItems>,
+    val addItemInteractor: AddItemInteractor,
     val removeItemInteractor: RemoveItemInteractor
 ) : RecyclerView.Adapter<RecyclerChangeAdapter.BaseViewHolder>() {
 
-    fun setListDataRemove(listDataNew: MutableList<Data>, position: Int) {
-        listData = listDataNew
-        notifyDataSetChanged()
-//        notifyItemRemoved(position) // анимированное действие с элементом
+    fun setListDataRemove(listEntityTypeItemsNew: List<EntityTypeItems>, position: Int) {
+        listData = listEntityTypeItemsNew
+        notifyItemRemoved(position) // анимированное действие с элементом
     }
 
-    fun setListDataAdd(listDataNew: MutableList<Data>, position: Int) {
-        listData = listDataNew
-        notifyDataSetChanged()
-//        notifyItemInserted(position) // анимированное действие с элементом
+    fun setListDataAdd(listEntityTypeItemsNew: List<EntityTypeItems>, position: Int) {
+        listData = listEntityTypeItemsNew
+        notifyItemInserted(position) // анимированное действие с элементом
     }
 
     // определяем на какой позиции кто должен находится (у нас пример из трех item)
@@ -78,19 +77,17 @@ class RecyclerChangeAdapter(
      */
     class HeaderViewHolder(val binding: FragmentRecyclerChangeItemHeaderBinding) :
         BaseViewHolder(binding.root) {
-        override fun bind(data: Data) {
-            binding.name.text = data.name
+        override fun bind(entityTypeItems: EntityTypeItems) {
+            binding.name.text = entityTypeItems.name
         }
     }
 
     inner class EarthViewHolder(val binding: FragmentRecyclerChangeItemEarthBinding) :
         BaseViewHolder(binding.root) {
-        override fun bind(data: Data) {
-            binding.name.text = data.name
+        override fun bind(entityTypeItems: EntityTypeItems) {
+            binding.name.text = entityTypeItems.name
             binding.addItemImageView.setOnClickListener {
-//                addItemInteractor.add(layoutPosition)
-                listData.add(layoutPosition, Data("Земля(New)", type = TYPE_EARTH))
-                notifyItemInserted(layoutPosition)
+                addItemInteractor.add(layoutPosition)
             }
             binding.removeItemImageView.setOnClickListener {
                 removeItemInteractor.remove(layoutPosition)
@@ -107,12 +104,10 @@ class RecyclerChangeAdapter(
      */
     inner class MarsViewHolder(val binding: FragmentRecyclerChangeItemMarsBinding) :
         BaseViewHolder(binding.root) {
-        override fun bind(data: Data) {
-            binding.name.text = data.name
+        override fun bind(entityTypeItems: EntityTypeItems) {
+            binding.name.text = entityTypeItems.name
             binding.addItemImageView.setOnClickListener {
-                listData.add(layoutPosition, Data("Марс(New)", type = TYPE_MARS))
-                notifyItemInserted(layoutPosition)
-//                addItemInteractor.add(layoutPosition)
+                addItemInteractor.add(layoutPosition)
             }
             binding.removeItemImageView.setOnClickListener {
                 removeItemInteractor.remove(layoutPosition)
@@ -122,6 +117,6 @@ class RecyclerChangeAdapter(
 
     abstract class BaseViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
-        abstract fun bind(data: Data)
+        abstract fun bind(entityTypeItems: EntityTypeItems)
     }
 }

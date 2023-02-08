@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.materialdesing.databinding.FragmentRecyclerItemEarthBinding
 import com.example.materialdesing.databinding.FragmentRecyclerItemHeaderBinding
 import com.example.materialdesing.databinding.FragmentRecyclerItemMarsBinding
-import com.example.materialdesing.ui.recycler.Data
-import com.example.materialdesing.ui.recycler.TYPE_EARTH
-import com.example.materialdesing.ui.recycler.TYPE_MARS
+import com.example.materialdesing.domain.entity.EntityTypeItems
+import com.example.materialdesing.domain.entity.TYPE_EARTH
+import com.example.materialdesing.domain.entity.TYPE_MARS
 
 class RecyclerAdapter(
-    private val listData: List<Data>
+    private val listData: List<EntityTypeItems>
 ) : RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>() {
 
 
@@ -64,27 +64,27 @@ class RecyclerAdapter(
      */
     class HeaderViewHolder(val binding: FragmentRecyclerItemHeaderBinding) :
         BaseViewHolder(binding.root) {
-        override fun bind(data: Data) {
-            binding.name.text = data.name
+        override fun bind(entityTypeItems: EntityTypeItems) {
+            binding.name.text = entityTypeItems.name
         }
     }
 
     class EarthViewHolder(val binding: FragmentRecyclerItemEarthBinding) :
         BaseViewHolder(binding.root) {
-        override fun bind(data: Data) {
-            binding.name.text = data.name
+        override fun bind(entityTypeItems: EntityTypeItems) {
+            binding.name.text = entityTypeItems.name
         }
     }
 
     class MarsViewHolder(val binding: FragmentRecyclerItemMarsBinding) :
         BaseViewHolder(binding.root) {
-        override fun bind(data: Data) {
-            binding.name.text = data.name
+        override fun bind(entityTypeItems: EntityTypeItems) {
+            binding.name.text = entityTypeItems.name
         }
     }
 
     abstract class BaseViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
-        abstract fun bind(data: Data)
+        abstract fun bind(entityTypeItems: EntityTypeItems)
     }
 }
