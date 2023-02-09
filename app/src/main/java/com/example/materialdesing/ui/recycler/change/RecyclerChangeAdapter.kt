@@ -3,7 +3,9 @@ package com.example.materialdesing.ui.recycler.change
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentRecyclerChangeItemEarthBinding
 import com.example.materialdesing.databinding.FragmentRecyclerChangeItemHeaderBinding
 import com.example.materialdesing.databinding.FragmentRecyclerChangeItemMarsBinding
@@ -12,12 +14,14 @@ import com.example.materialdesing.domain.entity.TYPE_EARTH
 import com.example.materialdesing.domain.entity.TYPE_MARS
 import com.example.materialdesing.domain.interactor.AddItemInteractor
 import com.example.materialdesing.domain.interactor.RemoveItemInteractor
+import com.gb.m_2090_3.view.recycler.ItemTouchHelperAdapter
+import com.gb.m_2090_3.view.recycler.ItemTouchHelperViewHolder
 
 class RecyclerChangeAdapter(
     private var listData: MutableList<Pair<EntityTypeItems, Boolean>>,
     val addItemInteractor: AddItemInteractor,
     val removeItemInteractor: RemoveItemInteractor
-) : RecyclerView.Adapter<RecyclerChangeAdapter.BaseViewHolder>() {
+) : RecyclerView.Adapter<RecyclerChangeAdapter.BaseViewHolder>(), ItemTouchHelperAdapter {
 
     fun setListDataRemove(
         listEntityTypeItemsNew: MutableList<Pair<EntityTypeItems, Boolean>>,
@@ -193,7 +197,26 @@ class RecyclerChangeAdapter(
     }
 
     abstract class BaseViewHolder(view: View) :
-        RecyclerView.ViewHolder(view) {
+        RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder {
         abstract fun bind(entityTypeItems: Pair<EntityTypeItems, Boolean>)
+        override fun onItemSelect() {
+            itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.teal_200))
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
+    }
+
+    // реализация интерфейса ItemTouchHelperAdapter
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        listData.removeAt(fromPosition).apply {// удали с позиции и переместили на другую позицию
+            listData.add(toPosition, this)
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        removeItemInteractor.remove(position)
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentRecyclerChangeBinding
 import com.example.materialdesing.domain.entity.EntityTypeItems
@@ -33,6 +34,9 @@ class RecyclerChangeFragment : Fragment(R.layout.fragment_recycler_change) {
 
         // созданный
         binding.recyclerView.adapter = adapter
+
+        // запускаем ItemTouchHelper
+        ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.recyclerView)
 
         // Пример связывания двух чисел
         val lat = 10
