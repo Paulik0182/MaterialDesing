@@ -14,24 +14,30 @@ import com.example.materialdesing.domain.interactor.AddItemInteractor
 import com.example.materialdesing.domain.interactor.RemoveItemInteractor
 
 class RecyclerChangeAdapter(
-    private var listData: MutableList<EntityTypeItems>,
+    private var listData: MutableList<Pair<EntityTypeItems, Boolean>>,
     val addItemInteractor: AddItemInteractor,
     val removeItemInteractor: RemoveItemInteractor
 ) : RecyclerView.Adapter<RecyclerChangeAdapter.BaseViewHolder>() {
 
-    fun setListDataRemove(listEntityTypeItemsNew: MutableList<EntityTypeItems>, position: Int) {
+    fun setListDataRemove(
+        listEntityTypeItemsNew: MutableList<Pair<EntityTypeItems, Boolean>>,
+        position: Int
+    ) {
         listData = listEntityTypeItemsNew
         notifyItemRemoved(position) // анимированное действие с элементом
     }
 
-    fun setListDataAdd(listEntityTypeItemsNew: MutableList<EntityTypeItems>, position: Int) {
+    fun setListDataAdd(
+        listEntityTypeItemsNew: MutableList<Pair<EntityTypeItems, Boolean>>,
+        position: Int
+    ) {
         listData = listEntityTypeItemsNew
         notifyItemInserted(position) // анимированное действие с элементом
     }
 
     // определяем на какой позиции кто должен находится (у нас пример из трех item)
     override fun getItemViewType(position: Int): Int {
-        return listData[position].type // установили значение по позиции type
+        return listData[position].first.type // установили значение по позиции type
     }
 
     /**
@@ -77,15 +83,15 @@ class RecyclerChangeAdapter(
      */
     class HeaderViewHolder(val binding: FragmentRecyclerChangeItemHeaderBinding) :
         BaseViewHolder(binding.root) {
-        override fun bind(entityTypeItems: EntityTypeItems) {
-            binding.name.text = entityTypeItems.name
+        override fun bind(entityTypeItems: Pair<EntityTypeItems, Boolean>) {
+            binding.name.text = entityTypeItems.first.name
         }
     }
 
     inner class EarthViewHolder(val binding: FragmentRecyclerChangeItemEarthBinding) :
         BaseViewHolder(binding.root) {
-        override fun bind(entityTypeItems: EntityTypeItems) {
-            binding.name.text = entityTypeItems.name
+        override fun bind(entityTypeItems: Pair<EntityTypeItems, Boolean>) {
+            binding.name.text = entityTypeItems.first.name // first первый
             binding.addItemImageView.setOnClickListener {
                 addItemInteractor.add(layoutPosition)
             }
@@ -119,6 +125,16 @@ class RecyclerChangeAdapter(
                     Unit
                 }
             }
+
+            binding.earthDescriptionTextView.visibility =
+                if (listData[layoutPosition].second) View.VISIBLE else View.GONE
+
+            binding.earthImageView.setOnClickListener {
+                listData[layoutPosition] = listData[layoutPosition].let {
+                    it.first to !it.second // взяли то что было и поменяли на противоположное
+                }
+                notifyItemChanged(layoutPosition)
+            }
         }
     }
 
@@ -131,8 +147,8 @@ class RecyclerChangeAdapter(
      */
     inner class MarsViewHolder(val binding: FragmentRecyclerChangeItemMarsBinding) :
         BaseViewHolder(binding.root) {
-        override fun bind(entityTypeItems: EntityTypeItems) {
-            binding.name.text = entityTypeItems.name
+        override fun bind(entityTypeItems: Pair<EntityTypeItems, Boolean>) {
+            binding.name.text = entityTypeItems.first.name
             binding.addItemImageView.setOnClickListener {
                 addItemInteractor.add(layoutPosition)
             }
@@ -163,11 +179,21 @@ class RecyclerChangeAdapter(
                     Unit
                 }
             }
+
+            binding.marsDescriptionTextView.visibility =
+                if (listData[layoutPosition].second) View.VISIBLE else View.GONE
+
+            binding.marsImageView.setOnClickListener {
+                listData[layoutPosition] = listData[layoutPosition].let {
+                    it.first to !it.second
+                }
+                notifyItemChanged(layoutPosition)
+            }
         }
     }
 
     abstract class BaseViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
-        abstract fun bind(entityTypeItems: EntityTypeItems)
+        abstract fun bind(entityTypeItems: Pair<EntityTypeItems, Boolean>)
     }
 }

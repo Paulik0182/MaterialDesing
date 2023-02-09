@@ -22,7 +22,7 @@ class RecyclerChangeFragment : Fragment(R.layout.fragment_recycler_change) {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var adapter: RecyclerChangeAdapter
 
-    private val data: MutableList<EntityTypeItems> = mutableListOf()
+    private val data: MutableList<Pair<EntityTypeItems, Boolean>> = mutableListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,28 +33,46 @@ class RecyclerChangeFragment : Fragment(R.layout.fragment_recycler_change) {
 
         // созданный
         binding.recyclerView.adapter = adapter
+
+        // Пример связывания двух чисел
+        val lat = 10
+        val lon = 10
+        val location = lat to lon // связываем два числа (это абстракция). Вариант 1
+        location.first // получаем широту
+        location.second // получаем долготу
+        val location2 = Pair(lat, lon) // связываем два числа (это абстракция). Вариант 2
+        // Используем связывание для хранения состояния
     }
 
     init {
-        data.add(EntityTypeItems(0, "Заголовок", type = TYPE_HEADER))
-        data.add(EntityTypeItems(1, "Земля", type = TYPE_EARTH))
-        data.add(EntityTypeItems(2, "Земля", type = TYPE_EARTH))
-        data.add(EntityTypeItems(3, "Марс", type = TYPE_MARS))
-        data.add(EntityTypeItems(4, "Земля", type = TYPE_EARTH))
-        data.add(EntityTypeItems(5, "Земля", type = TYPE_EARTH))
-        data.add(EntityTypeItems(6, "Земля", type = TYPE_EARTH))
-        data.add(EntityTypeItems(7, "Марс", type = TYPE_MARS))
+        data.add(Pair(EntityTypeItems(0, "Заголовок", type = TYPE_HEADER), false))
+        data.add(Pair(EntityTypeItems(1, "Земля", type = TYPE_EARTH), false))
+        data.add(Pair(EntityTypeItems(2, "Земля", type = TYPE_EARTH), false))
+        data.add(Pair(EntityTypeItems(3, "Марс", type = TYPE_MARS), false))
+        data.add(Pair(EntityTypeItems(4, "Земля", type = TYPE_EARTH), false))
+        data.add(Pair(EntityTypeItems(5, "Земля", type = TYPE_EARTH), false))
+        data.add(Pair(EntityTypeItems(6, "Земля", type = TYPE_EARTH), false))
+        data.add(Pair(EntityTypeItems(7, "Марс", type = TYPE_MARS), false))
         idCounter = 7
     }
 
     private val addItemInteractor = AddItemInteractor {
         when (it) {
             TYPE_EARTH -> {
-                data.add(it, EntityTypeItems(idCounter++, "Земля(New)" + it, type = TYPE_EARTH))
-
+                data.add(
+                    it,
+                    Pair(
+                        EntityTypeItems(idCounter++, "Земля(New)" + it, type = TYPE_EARTH),
+                        false
+                    )
+                )
             }
             TYPE_MARS -> {
-                data.add(it, EntityTypeItems(idCounter++, "Марс(New)" + it, type = TYPE_MARS))
+                data.add(
+                    it, Pair(
+                        EntityTypeItems(idCounter++, "Марс(New)" + it, type = TYPE_MARS), false
+                    )
+                )
             }
         }
         adapter.setListDataAdd(data, it)
