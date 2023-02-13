@@ -1,21 +1,24 @@
 package com.example.materialdesing.ui.nasa
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.Html
-import android.text.SpannableString
-import android.text.SpannableStringBuilder
-import android.text.Spanned
+import android.text.*
+import android.text.style.BulletSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.ImageSpan
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -195,14 +198,12 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         }
     }
 
+    @SuppressLint("NewApi") // не потерять пользователей с 24 по 27 sdk
     private fun setPhotoDto(photoDto: PhotoDto) {
         binding.dateTextView.text = photoDto.date
 
-        binding.titleTextView.text = photoDto.title
-        binding.dateTextView.typeface =
-            Typeface.createFromAsset(requireActivity().assets, "folder1/folder3/az_eret.ttf")
-
-        binding.explanationTextView.text = photoDto.explanation
+//        binding.titleTextView.text = photoDto.title
+//        binding.explanationTextView.text = photoDto.explanation
 
         if (photoDto.url.isNotBlank()) {
             Picasso.get()
@@ -213,14 +214,73 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
 
         val spanned: Spanned
         val spannableString: SpannableString
+        val spannableStringTitle: SpannableString
         val spannableStringBuilder: SpannableStringBuilder
 
-        val text = "My text <ul><li>bullet one</li><li>bullet two</li></ul>"
+        val text = "My text \nbullet one \nbullet two"
+
+        spannableString = SpannableString(photoDto.explanation)
+        spannableStringTitle = SpannableString(photoDto.title)
+
+        val bulletSpanOne = BulletSpan(
+            20,
+            ContextCompat.getColor(requireContext(), R.color.red), 20
+        )
+        val bulletSpanSecond = BulletSpan(
+            20,
+            ContextCompat.getColor(requireContext(), R.color.red), 20
+        )
+
+        // установили отметку красной строки
+        spannableString.setSpan(bulletSpanOne, 0, 20, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(
+            bulletSpanSecond,
+            21,
+            spannableString.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
 
 
-        binding.explanationTextView.text = text // необработанный текст
-        binding.explanationTextView.text =
-            Html.fromHtml(text) // обрабатываем текст (устаревший метод)
+        // отметили все буквы "t" красным цветом (прошли по массиву, выбрали индекс и перекрасили букву)
+        for (i in photoDto.explanation.indices) {
+            if (photoDto.explanation[i] == 't') {
+                spannableString.setSpan(
+                    ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.red)),
+                    i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+        }
+
+        for (i in photoDto.explanation.indices) {
+            if (photoDto.explanation[i] == 'u') {
+                spannableString.setSpan(
+                    ForegroundColorSpan(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.bnv_default
+                        )
+                    ),
+                    i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+        }
+
+        // заменили букву на картинку в тексте
+        val bitmap = ContextCompat.getDrawable(requireContext(), R.drawable.earth)!!.toBitmap()
+        for (i in photoDto.title.indices) {
+            if (photoDto.title[i] == 'o') {
+                spannableStringTitle.setSpan(
+                    ImageSpan(requireContext(), bitmap),
+                    i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+        }
+
+        binding.explanationTextView.text = spannableString
+
+        binding.titleTextView.text = spannableStringTitle
+        binding.dateTextView.typeface =
+            Typeface.createFromAsset(requireActivity().assets, "folder1/folder3/az_eret.ttf")
     }
 
     companion object {
