@@ -1,6 +1,7 @@
 package com.example.materialdesing.ui.nasa
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -192,7 +193,11 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
 
     private fun setPhotoDto(photoDto: PhotoDto) {
         binding.dateTextView.text = photoDto.date
+
         binding.titleTextView.text = photoDto.title
+        binding.dateTextView.typeface =
+            Typeface.createFromAsset(requireActivity().assets, "folder1/folder3/az_eret.ttf")
+
         binding.explanationTextView.text = photoDto.explanation
 
         if (photoDto.url.isNotBlank()) {
