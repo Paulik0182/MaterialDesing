@@ -6,6 +6,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Html
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.Spanned
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
@@ -206,6 +210,17 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
                 .placeholder(R.drawable.uploading_images)
                 .into(binding.photoDeyImageView)
         }
+
+        val spanned: Spanned
+        val spannableString: SpannableString
+        val spannableStringBuilder: SpannableStringBuilder
+
+        val text = "My text <ul><li>bullet one</li><li>bullet two</li></ul>"
+
+
+        binding.explanationTextView.text = text // необработанный текст
+        binding.explanationTextView.text =
+            Html.fromHtml(text) // обрабатываем текст (устаревший метод)
     }
 
     companion object {
