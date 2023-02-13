@@ -15,6 +15,12 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/list_recycler_view"
+        android:icon="@drawable/list_recycler_view_24"
+        android:title="@string/list"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/settings_item"
         android:icon="@drawable/ic_settings_24"
         android:title="@string/settings"
