@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
 import android.text.*
@@ -37,6 +38,9 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
 
     private var _binding: FragmentPhotoDescriptionCoordinatorBinding? = null
     private val binding get() = _binding!!
+
+    lateinit var spannableRainbowDate: SpannableString//объеденяет все
+    lateinit var spannableRainbowTitle: SpannableString//объеденяет все
 
     private var flagVisible = true
     private var flagApproximationImage = true
@@ -329,6 +333,11 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         )
 
         binding.dateTextView.text = spannableStringBuilderDate
+
+        spannableRainbowDate = SpannableString(photoDto.date)
+        rainbow(1, spannableRainbowDate, binding.dateTextView)
+        spannableRainbowTitle = SpannableString(photoDto.title)
+        rainbow(1, spannableRainbowTitle, binding.titleTextView)
     }
 
     companion object {
@@ -341,4 +350,54 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         _binding = null
     }
 
+    private fun rainbow(i: Int = 1, span: SpannableString, container: TextView) {
+        var currentCount = i
+        val x = object : CountDownTimer(20000, 200) {
+            override fun onTick(millisUntilFinished: Long) {
+                colorText(currentCount, span, container)
+                currentCount = if (++currentCount > 5) 1 else currentCount
+            }
+
+            override fun onFinish() {
+                rainbow(currentCount, span, container)
+            }
+        }
+        x.start()
+    }
+
+    private fun colorText(
+        colorFirstNumber: Int,
+        spannableString: SpannableString,
+        container: TextView
+    ) {
+        container.setText(spannableString, TextView.BufferType.SPANNABLE)
+        spannableRainbowTitle = container.text as SpannableString
+        spannableRainbowDate = container.text as SpannableString
+        val map = mapOf(
+            0 to ContextCompat.getColor(requireContext(), R.color.red),
+            1 to ContextCompat.getColor(requireContext(), R.color.orange),
+            2 to ContextCompat.getColor(requireContext(), R.color.yellow),
+            3 to ContextCompat.getColor(requireContext(), R.color.green_white),
+            4 to ContextCompat.getColor(requireContext(), R.color.blue),
+            5 to ContextCompat.getColor(requireContext(), R.color.purple_700),
+            6 to ContextCompat.getColor(requireContext(), R.color.purple_500)
+        )
+        val spans = spannableString.getSpans(
+            0, spannableString.length,
+            ForegroundColorSpan::class.java
+        )
+        for (span in spans) {
+            spannableString.removeSpan(span)
+        }
+
+        var colorNumber = colorFirstNumber
+        for (i in 0 until container.text.length) {
+            if (colorNumber == 5) colorNumber = 0 else colorNumber += 1
+            spannableString.setSpan(
+                ForegroundColorSpan(map.getValue(colorNumber)),
+                i, i + 1,
+                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+            )
+        }
+    }
 }
