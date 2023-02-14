@@ -11,12 +11,15 @@ import android.text.*
 import android.text.style.BulletSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.ImageSpan
+import android.text.style.TypefaceSpan
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.provider.FontRequest
+import androidx.core.provider.FontsContractCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -199,7 +202,7 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
 
     @SuppressLint("NewApi") // не потерять пользователей с 24 по 27 sdk
     private fun setPhotoDto(photoDto: PhotoDto) {
-        binding.dateTextView.text = photoDto.date
+//        binding.dateTextView.text = photoDto.date
 
 //        binding.titleTextView.text = photoDto.title
 //        binding.explanationTextView.text = photoDto.explanation
@@ -215,7 +218,9 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         val spannableString: SpannableString
         val spannableStringTitle: SpannableString
         var spannableStringBuilder: SpannableStringBuilder
-        val spannableStringBuilderTitle: SpannableStringBuilder
+        var spannableStringBuilderDate: SpannableStringBuilder
+        var spannableStringBuilderTitle: SpannableStringBuilder
+
 
         val text = "My text \nbullet one \nbullet two"
 
@@ -290,8 +295,40 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
 //        binding.explanationTextView.text = spannableStringBuilder
 
         binding.titleTextView.text = spannableStringBuilderTitle
-        binding.dateTextView.typeface =
-            Typeface.createFromAsset(requireActivity().assets, "folder1/folder3/az_eret.ttf")
+
+//        binding.dateTextView.typeface =
+//            Typeface.createFromAsset(requireActivity().assets, "folder1/folder3/az_eret.ttf")
+
+
+        spannableStringBuilderDate = SpannableStringBuilder(photoDto.date)
+        // подгружаем шрифты
+        val request = FontRequest(
+            "com.google.android.gms.fonts", "com.google.android.gms", "Aladin",
+            R.array.com_google_android_gms_fonts_certs
+        )
+
+        val callback = object : FontsContractCompat.FontRequestCallback() {
+            override fun onTypefaceRetrieved(typeface: Typeface?) {
+                typeface?.let {
+                    spannableStringBuilderDate.setSpan(
+                        TypefaceSpan(it),
+                        // применение шрифта на всю строку
+                        0, spannableStringBuilderDate.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+
+                super.onTypefaceRetrieved(typeface)
+            }
+        }
+
+        FontsContractCompat.requestFont(
+            requireContext(),
+            request,
+            callback,
+            Handler(Looper.getMainLooper())
+        )
+
+        binding.dateTextView.text = spannableStringBuilderDate
     }
 
     companion object {
