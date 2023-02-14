@@ -14,10 +14,7 @@ import android.text.style.ImageSpan
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.isVisible
@@ -217,12 +214,15 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         val spanned: Spanned
         val spannableString: SpannableString
         val spannableStringTitle: SpannableString
-        val spannableStringBuilder: SpannableStringBuilder
+        var spannableStringBuilder: SpannableStringBuilder
         val spannableStringBuilderTitle: SpannableStringBuilder
 
         val text = "My text \nbullet one \nbullet two"
 
+        // применение spannableStringBuilder без пересоздания и использования жизненых циклов (работаем с текстом на лету)
         spannableStringBuilder = SpannableStringBuilder(photoDto.explanation)
+        binding.explanationTextView.setText(spannableStringBuilder, TextView.BufferType.EDITABLE)
+        spannableStringBuilder = binding.explanationTextView.text as SpannableStringBuilder
 
         for (i in photoDto.explanation.indices) {
             if (photoDto.explanation[i] == '.') {
@@ -287,7 +287,7 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
             }
         }
 
-        binding.explanationTextView.text = spannableStringBuilder
+//        binding.explanationTextView.text = spannableStringBuilder
 
         binding.titleTextView.text = spannableStringBuilderTitle
         binding.dateTextView.typeface =
