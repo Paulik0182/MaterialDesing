@@ -218,10 +218,18 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         val spannableString: SpannableString
         val spannableStringTitle: SpannableString
         val spannableStringBuilder: SpannableStringBuilder
+        val spannableStringBuilderTitle: SpannableStringBuilder
 
         val text = "My text \nbullet one \nbullet two"
 
-        spannableString = SpannableString(photoDto.explanation)
+        spannableStringBuilder = SpannableStringBuilder(photoDto.explanation)
+
+        for (i in photoDto.explanation.indices) {
+            if (photoDto.explanation[i] == '.') {
+//                spannableStringBuilder.insert(i,".\n")
+                spannableStringBuilder.replace(i, i, ".\n")
+            }
+        }
 
         val result =
             photoDto.explanation.indexesOf("  ") // поиск соответствующего символа (два пробела)
@@ -231,14 +239,14 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
             result.lastIndexOf(0) //.first() // заполнили текущий элемент (пропускаем нулевую позицию) можно установить 0 и тогда первый также будет отмечен)
         result.forEach {
             if (current != it) {
-                spannableString.setSpan(
+                spannableStringBuilder.setSpan(
                     BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.red), 20),
                     current + 1, it, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
             }
             current = it
         }
-        spannableString.setSpan(
+        spannableStringBuilder.setSpan(
             BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.red), 20),
             current + 1, photoDto.explanation.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
@@ -246,7 +254,7 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         // отметили все буквы "t" красным цветом (прошли по массиву, выбрали индекс и перекрасили букву)
         for (i in photoDto.explanation.indices) {
             if (photoDto.explanation[i] == 't') {
-                spannableString.setSpan(
+                spannableStringBuilder.setSpan(
                     ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.red)),
                     i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
@@ -255,7 +263,7 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
 
         for (i in photoDto.explanation.indices) {
             if (photoDto.explanation[i] == 'u') {
-                spannableString.setSpan(
+                spannableStringBuilder.setSpan(
                     ForegroundColorSpan(
                         ContextCompat.getColor(
                             requireContext(),
@@ -267,21 +275,21 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
             }
         }
 
-        spannableStringTitle = SpannableString(photoDto.title)
+        spannableStringBuilderTitle = SpannableStringBuilder(photoDto.title)
         // заменили букву на картинку в тексте
         val bitmap = ContextCompat.getDrawable(requireContext(), R.drawable.earth)!!.toBitmap()
         for (i in photoDto.title.indices) {
             if (photoDto.title[i] == 'o') {
-                spannableStringTitle.setSpan(
+                spannableStringBuilderTitle.setSpan(
                     ImageSpan(requireContext(), bitmap),
                     i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
             }
         }
 
-        binding.explanationTextView.text = spannableString
+        binding.explanationTextView.text = spannableStringBuilder
 
-        binding.titleTextView.text = spannableStringTitle
+        binding.titleTextView.text = spannableStringBuilderTitle
         binding.dateTextView.typeface =
             Typeface.createFromAsset(requireActivity().assets, "folder1/folder3/az_eret.ttf")
     }
