@@ -11,6 +11,7 @@ import android.text.*
 import android.text.style.BulletSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.ImageSpan
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
@@ -28,6 +29,7 @@ import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentPhotoDescriptionCoordinatorBinding
 import com.example.materialdesing.domain.entity.PhotoDto
 import com.example.materialdesing.domain.repo.PhotoRepo
+import com.example.materialdesing.utils.indexesOf
 import com.example.materialdesing.utils.toastMake
 import com.squareup.picasso.Picasso
 
@@ -220,26 +222,26 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         val text = "My text \nbullet one \nbullet two"
 
         spannableString = SpannableString(photoDto.explanation)
-        spannableStringTitle = SpannableString(photoDto.title)
 
-        val bulletSpanOne = BulletSpan(
-            20,
-            ContextCompat.getColor(requireContext(), R.color.red), 20
-        )
-        val bulletSpanSecond = BulletSpan(
-            20,
-            ContextCompat.getColor(requireContext(), R.color.red), 20
-        )
+        val result =
+            photoDto.explanation.indexesOf("  ") // поиск соответствующего символа (два пробела)
+        Log.d("@@@", result.toString())
 
-        // установили отметку красной строки
-        spannableString.setSpan(bulletSpanOne, 0, 20, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        var current =
+            result.lastIndexOf(0) //.first() // заполнили текущий элемент (пропускаем нулевую позицию) можно установить 0 и тогда первый также будет отмечен)
+        result.forEach {
+            if (current != it) {
+                spannableString.setSpan(
+                    BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.red), 20),
+                    current + 1, it, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+            current = it
+        }
         spannableString.setSpan(
-            bulletSpanSecond,
-            21,
-            spannableString.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            BulletSpan(20, ContextCompat.getColor(requireContext(), R.color.red), 20),
+            current + 1, photoDto.explanation.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-
 
         // отметили все буквы "t" красным цветом (прошли по массиву, выбрали индекс и перекрасили букву)
         for (i in photoDto.explanation.indices) {
@@ -265,6 +267,7 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
             }
         }
 
+        spannableStringTitle = SpannableString(photoDto.title)
         // заменили букву на картинку в тексте
         val bitmap = ContextCompat.getDrawable(requireContext(), R.drawable.earth)!!.toBitmap()
         for (i in photoDto.title.indices) {
