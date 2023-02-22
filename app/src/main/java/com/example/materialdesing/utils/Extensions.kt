@@ -12,6 +12,13 @@ import com.google.android.material.snackbar.Snackbar
  * extension- расширение функций
  */
 
+// для строки в которой (ищу суб строку, нахожу все подстроки и перевожу их в новый список
+// (в этом списке будут номера позиции строк вхождении в большой строке) мы
+// получаем координаты вхождения в строку) todo помогает в работе со Spanned
+fun String.indexesOf(substr: String, ignoreCase: Boolean = true): List<Int> =
+    (if (ignoreCase) Regex(substr, RegexOption.IGNORE_CASE) else Regex(substr))
+        .findAll(this).map { it.range.first }.toList()
+
 fun View.snack(text: String) {
     Snackbar.make(
         this,
