@@ -67,8 +67,21 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         onClickIcon()
 
         viewModel.inProgressLiveData.observe(viewLifecycleOwner) { inProgress ->
-            binding.photoDeyImageView.isVisible = !inProgress
-            binding.progressTaskBar.isVisible = inProgress
+            val fullTime = 4_000f
+            object : CountDownTimer(fullTime.toLong(), 1L) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val process = ((1 - millisUntilFinished / fullTime) * 100).toInt()
+//                    if(binding.progressTaskBar.progress!=process)
+                    binding.photoDeyImageView.isVisible = inProgress
+                    binding.progressTaskBar.progress = process
+                }
+
+                override fun onFinish() {
+                    binding.photoDeyImageView.isVisible = !inProgress
+                    binding.progressTaskBar.isVisible = inProgress
+                }
+
+            }.start()
         }
 
         binding.todayChip.performClick()

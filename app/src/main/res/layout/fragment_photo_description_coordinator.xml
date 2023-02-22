@@ -7,10 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.nasa.PhotoDeyFragment">
 
-    <ProgressBar
+    <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progress_task_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:max="100"
+        android:min="0"
         android:layout_gravity="center" />
 
     <LinearLayout
