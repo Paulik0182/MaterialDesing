@@ -36,11 +36,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(R.style.SplashTheme)
         binding = ActivityAnimationBinding.inflate(layoutInflater)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-
-        actionBar?.hide()
 
         setContentView(binding.root)
 
