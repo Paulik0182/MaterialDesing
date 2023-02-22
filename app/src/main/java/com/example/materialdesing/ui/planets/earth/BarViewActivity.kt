@@ -18,6 +18,7 @@ class BarViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Base_Theme_MaterialDesing)
         binding = ActivityBarViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

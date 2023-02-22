@@ -1,6 +1,7 @@
 package com.example.materialdesing.ui.nasa
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
@@ -338,6 +339,17 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         rainbow(1, spannableRainbowDate, binding.dateTextView)
         spannableRainbowTitle = SpannableString(photoDto.title)
         rainbow(1, spannableRainbowTitle, binding.titleTextView)
+    }
+
+    interface Controller {
+        // todo
+    }
+
+    private fun getController(): Controller = activity as Controller
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        getController()
     }
 
     companion object {

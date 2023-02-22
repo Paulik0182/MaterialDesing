@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 //        WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
+        setTheme(R.style.SplashTheme)
         binding = ActivityAnimationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
