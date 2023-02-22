@@ -80,6 +80,7 @@
     <!-- -->
     <style name="SplashTheme" parent="Base.Theme.MaterialDesing">
         <item name="android:windowBackground">@drawable/splash_background</item>
+
     </style>
 
 </resources>

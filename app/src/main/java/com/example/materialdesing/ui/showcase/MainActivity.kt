@@ -1,5 +1,6 @@
 package com.example.materialdesing.ui.showcase
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
@@ -29,11 +30,18 @@ class MainActivity : AppCompatActivity() {
 
 //    private lateinit var adapter: ShowcaseAdapter
 
+    @SuppressLint("AppCompatMethod")
     override fun onCreate(savedInstanceState: Bundle?) {
 //        WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
         setTheme(R.style.SplashTheme)
         binding = ActivityAnimationBinding.inflate(layoutInflater)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+
+        actionBar?.hide()
+
         setContentView(binding.root)
 
         isFlag = !isFlag
