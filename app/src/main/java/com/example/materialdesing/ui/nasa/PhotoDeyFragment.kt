@@ -34,6 +34,8 @@ import com.example.materialdesing.domain.repo.PhotoRepo
 import com.example.materialdesing.utils.indexesOf
 import com.example.materialdesing.utils.toastMake
 import com.squareup.picasso.Picasso
+import smartdevelop.ir.eram.showcaseviewlib.GuideView
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 
 class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinator) {
 
@@ -80,8 +82,14 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
                     binding.photoDeyImageView.isVisible = !inProgress
                     binding.progressTaskBar.isVisible = inProgress
                 }
-
             }.start()
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                // проверяем, не умер ли фрагент. Это обязательно, иначе при быстрым
+                // переключением между фрагментами будет падение
+                if (isAdded)
+                    show()
+            }, 5_500)
         }
 
         binding.todayChip.performClick()
@@ -151,6 +159,18 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
                 binding.fab.layoutParams = params
             }, 1_002)
         }
+    }
+
+
+    // Туториалы для подсказок, напрмер для информирования фич пользователю
+    private fun show() {
+        GuideView.Builder(requireContext())
+            .setTitle("Кнопка")
+            .setContentText("Нажми и появится\n Поиск на Википедии\n Выбор фото космоса")
+            .setTargetView(binding.fab)
+            .setDismissType(DismissType.anywhere) //для сокрытия окна. необязательно - по умолчанию отключается targetView
+            .build()
+            .show()
     }
 
     // Приближение (увеличение) картинки по нажатию на нее
