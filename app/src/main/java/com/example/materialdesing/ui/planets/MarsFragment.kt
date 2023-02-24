@@ -3,20 +3,19 @@ package com.example.materialdesing.ui.planets
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.materialdesing.App
 import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentMarsBinding
 import com.example.materialdesing.domain.repo.EarthRepo
 import com.example.materialdesing.domain.repo.MarsRepo
+import com.example.materialdesing.ui.ViewBindingFragment
 import com.example.nasaapp.model.data.MarsServerResponseData
 import com.squareup.picasso.Picasso
 
-class MarsFragment : Fragment(R.layout.fragment_mars) {
-
-    private var _biding: FragmentMarsBinding? = null
-    private val binding get() = _biding!!
+class MarsFragment : ViewBindingFragment<FragmentMarsBinding>(
+    FragmentMarsBinding::inflate
+) {
 
     private val app: App get() = requireActivity().application as App
 
@@ -37,8 +36,6 @@ class MarsFragment : Fragment(R.layout.fragment_mars) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _biding = FragmentMarsBinding.bind(view)
-
         viewModel.marsLiveData.observe(viewLifecycleOwner) {
             setPhotoDto(
                 it.last()
@@ -58,10 +55,5 @@ class MarsFragment : Fragment(R.layout.fragment_mars) {
             .into(binding.fotoMarsImageView)
         binding.fotoMarsImageView.scaleType =
             ImageView.ScaleType.FIT_CENTER
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _biding = null
     }
 }

@@ -23,7 +23,6 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.core.provider.FontRequest
 import androidx.core.provider.FontsContractCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.transition.*
 import com.example.materialdesing.App
@@ -31,16 +30,16 @@ import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentPhotoDescriptionCoordinatorBinding
 import com.example.materialdesing.domain.entity.PhotoDto
 import com.example.materialdesing.domain.repo.PhotoRepo
+import com.example.materialdesing.ui.ViewBindingFragment
 import com.example.materialdesing.utils.indexesOf
 import com.example.materialdesing.utils.toastMake
 import com.squareup.picasso.Picasso
 import smartdevelop.ir.eram.showcaseviewlib.GuideView
 import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 
-class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinator) {
-
-    private var _binding: FragmentPhotoDescriptionCoordinatorBinding? = null
-    private val binding get() = _binding!!
+class PhotoDeyFragment : ViewBindingFragment<FragmentPhotoDescriptionCoordinatorBinding>(
+    FragmentPhotoDescriptionCoordinatorBinding::inflate
+) {
 
     lateinit var spannableRainbowDate: SpannableString//объеденяет все
     lateinit var spannableRainbowTitle: SpannableString//объеденяет все
@@ -63,8 +62,6 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        _binding = FragmentPhotoDescriptionCoordinatorBinding.bind(view)
 
         onClickIcon()
 
@@ -388,11 +385,6 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
     companion object {
         @JvmStatic
         fun newInstance() = PhotoDeyFragment()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun rainbow(i: Int = 1, span: SpannableString, container: TextView) {

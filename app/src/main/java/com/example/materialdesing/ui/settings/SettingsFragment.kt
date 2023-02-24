@@ -3,19 +3,14 @@ package com.example.materialdesing.ui.settings
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentSettingsBinding
+import com.example.materialdesing.ui.ViewBindingFragment
 
-class SettingsFragment : Fragment(R.layout.fragment_settings) {
-
-    private var _binding: FragmentSettingsBinding? = null
-    private val binding get() = _binding!!
-
+class SettingsFragment : ViewBindingFragment<FragmentSettingsBinding>(
+    FragmentSettingsBinding::inflate
+) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        _binding = FragmentSettingsBinding.bind(view)
 
         binding.aboutAppButton.setOnClickListener {
 //            Handler(Looper.getMainLooper()).postDelayed({
@@ -42,10 +37,5 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     companion object {
         fun newInstance() = SettingsFragment()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
