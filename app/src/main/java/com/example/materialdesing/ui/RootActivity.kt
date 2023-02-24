@@ -52,13 +52,13 @@ class RootActivity : AppCompatActivity(),
             title = it.title
             when (it.itemId) {
                 R.id.photo_dey_item -> {
-                    swapFragment(photoDeyFragment)
+                    navigateTo(photoDeyFragment)
                 }
                 R.id.settings_item -> {
-                    swapFragment(SettingsFragment())
+                    navigateTo(SettingsFragment())
                 }
                 R.id.list_recycler_view -> {
-                    swapFragment(RootRecyclerFragment())
+                    navigateTo(RootRecyclerFragment())
                 }
                 R.id.app_bar_bottom_navigation -> {
                     val intent = Intent(this, BarViewActivity::class.java)
@@ -67,6 +67,19 @@ class RootActivity : AppCompatActivity(),
             }
             return@setOnItemSelectedListener true
         }
+    }
+
+    // Анимация перехода между фрагментами
+    private fun navigateTo(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().setCustomAnimations(
+            R.anim.slide_in,
+            R.anim.fade_out,
+            R.anim.fade_in,
+            R.anim.slide_out
+        ).replace(
+            binding.fragmentContainerFrameLayout.id, fragment,
+            TAG_ROOT_CONTAINER_LAYOUT_KEY
+        ).commit()
     }
 
     private fun swapFragment(fragment: Fragment) {
