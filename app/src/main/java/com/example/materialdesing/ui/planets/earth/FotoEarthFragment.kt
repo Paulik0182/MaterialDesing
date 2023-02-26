@@ -43,6 +43,8 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth_coordinator) {
 
         _binding = FragmentFotoEarthCoordinatorBinding.bind(view)
 
+        binding.icon.animate().rotation(7200f).setDuration(20000L).start() //Вращение элемента
+
         adapter = ViewPagerEarthAdapter(this)
 
         setTabs()
@@ -102,6 +104,9 @@ class FotoEarthFragment : Fragment(R.layout.fragment_foto_earth_coordinator) {
             .into(binding.fotoEarthImageView)
         binding.fotoEarthImageView.scaleType =
             ImageView.ScaleType.FIT_CENTER
+
+        binding.icon.visibility = View.GONE
+        binding.fotoEarthImageView.visibility = View.VISIBLE
     }
 
     companion object {

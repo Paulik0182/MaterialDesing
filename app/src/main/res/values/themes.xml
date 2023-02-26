@@ -19,7 +19,6 @@
         <!-- Chip -->
         <item name="chipStyle">@style/MyChipStile</item>
 
-
         <!-- fragment из файла attrs.xml-->
         <item name="default_fon_fragment">@color/light_turquoise</item>
         <item name="button_background">@color/dark_green</item>
@@ -93,4 +92,10 @@
 
         <item name="big_text">@dimen/default_text_size</item>
     </style>
+
+    <style name="SplashTheme" parent="Base.Theme.MaterialDesing">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+
+    </style>
+
 </resources>

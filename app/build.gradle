@@ -41,17 +41,17 @@ dependencies {
     // Android X
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-        // Test
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    // Test
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     testImplementation 'junit:junit:4.13.2'
 
-        // cardView
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    // cardView
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation "androidx.cardview:cardview:1.0.0"
-        // recyclerView
+    // recyclerView
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-        // viewModel
+    // viewModel
     implementation "androidx.fragment:fragment-ktx:1.5.5"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     def lifecycle_version = '2.5.1'
@@ -60,7 +60,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
     // Material
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.android.material:material:1.8.0'
 
     // Network
     // retrofit
@@ -72,6 +72,10 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
 
     // navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+    //tutorial (немного глючная библиотека, есть готовые решения)
+    // обязательно прописать в файле settings.gradle - maven { url 'https://jitpack.io' }
+    implementation 'com.github.mreram:showcaseview:1.4.0'
 }

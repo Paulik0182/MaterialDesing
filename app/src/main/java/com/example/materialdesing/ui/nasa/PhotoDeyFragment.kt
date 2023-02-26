@@ -1,6 +1,7 @@
 package com.example.materialdesing.ui.nasa
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
@@ -22,7 +23,6 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.core.provider.FontRequest
 import androidx.core.provider.FontsContractCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.transition.*
 import com.example.materialdesing.App
@@ -30,14 +30,16 @@ import com.example.materialdesing.R
 import com.example.materialdesing.databinding.FragmentPhotoDescriptionCoordinatorBinding
 import com.example.materialdesing.domain.entity.PhotoDto
 import com.example.materialdesing.domain.repo.PhotoRepo
+import com.example.materialdesing.ui.ViewBindingFragment
 import com.example.materialdesing.utils.indexesOf
 import com.example.materialdesing.utils.toastMake
 import com.squareup.picasso.Picasso
+import smartdevelop.ir.eram.showcaseviewlib.GuideView
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 
-class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinator) {
-
-    private var _binding: FragmentPhotoDescriptionCoordinatorBinding? = null
-    private val binding get() = _binding!!
+class PhotoDeyFragment : ViewBindingFragment<FragmentPhotoDescriptionCoordinatorBinding>(
+    FragmentPhotoDescriptionCoordinatorBinding::inflate
+) {
 
     lateinit var spannableRainbowDate: SpannableString//объеденяет все
     lateinit var spannableRainbowTitle: SpannableString//объеденяет все
@@ -61,13 +63,30 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentPhotoDescriptionCoordinatorBinding.bind(view)
-
         onClickIcon()
 
         viewModel.inProgressLiveData.observe(viewLifecycleOwner) { inProgress ->
-            binding.photoDeyImageView.isVisible = !inProgress
-            binding.progressTaskBar.isVisible = inProgress
+            val fullTime = 4_000f
+            object : CountDownTimer(fullTime.toLong(), 1L) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val process = ((1 - millisUntilFinished / fullTime) * 100).toInt()
+//                    if(binding.progressTaskBar.progress!=process)
+                    binding.photoDeyImageView.isVisible = inProgress
+                    binding.progressTaskBar.progress = process
+                }
+
+                override fun onFinish() {
+                    binding.photoDeyImageView.isVisible = !inProgress
+                    binding.progressTaskBar.isVisible = inProgress
+                }
+            }.start()
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                // проверяем, не умер ли фрагент. Это обязательно, иначе при быстрым
+                // переключением между фрагментами будет падение
+                if (isAdded)
+                    show()
+            }, 5_500)
         }
 
         binding.todayChip.performClick()
@@ -137,6 +156,18 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
                 binding.fab.layoutParams = params
             }, 1_002)
         }
+    }
+
+
+    // Туториалы для подсказок, напрмер для информирования фич пользователю
+    private fun show() {
+        GuideView.Builder(requireContext())
+            .setTitle("Кнопка")
+            .setContentText("Нажми и появится\n Поиск на Википедии\n Выбор фото космоса")
+            .setTargetView(binding.fab)
+            .setDismissType(DismissType.anywhere) //для сокрытия окна. необязательно - по умолчанию отключается targetView
+            .build()
+            .show()
     }
 
     // Приближение (увеличение) картинки по нажатию на нее
@@ -340,14 +371,20 @@ class PhotoDeyFragment : Fragment(R.layout.fragment_photo_description_coordinato
         rainbow(1, spannableRainbowTitle, binding.titleTextView)
     }
 
+    interface Controller {
+        // todo
+    }
+
+    private fun getController(): Controller = activity as Controller
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        getController()
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = PhotoDeyFragment()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun rainbow(i: Int = 1, span: SpannableString, container: TextView) {

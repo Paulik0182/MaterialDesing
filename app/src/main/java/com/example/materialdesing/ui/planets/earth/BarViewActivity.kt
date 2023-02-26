@@ -18,6 +18,7 @@ class BarViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Base_Theme_MaterialDesing)
         binding = ActivityBarViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -46,15 +47,15 @@ class BarViewActivity : AppCompatActivity() {
             title = it.title
             when (it.itemId) {
                 R.id.action_view_earth_item -> {
-                    swapFragment(EarthFragment())
+                    navigateTo(EarthFragment())
                     true
                 }
                 R.id.action_view_mars_item -> {
-                    swapFragment(MarsFragment())
+                    navigateTo(MarsFragment())
                     false
                 }
                 R.id.action_view_system_item -> {
-                    swapFragment(SystemFragment())
+                    navigateTo(SystemFragment())
                 }
                 R.id.exit_item -> {
                     finish()
@@ -63,6 +64,18 @@ class BarViewActivity : AppCompatActivity() {
             }
             return@setOnItemSelectedListener true
         }
+    }
+
+    private fun navigateTo(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().setCustomAnimations(
+            R.anim.slide_in,
+            R.anim.fade_out,
+            R.anim.fade_in,
+            R.anim.slide_out
+        ).replace(
+            binding.container.id, fragment,
+            TAG_BAR_VIEW_ACTIVITY_CONTAINER_LAYOUT_KEY
+        ).commit()
     }
 
     private fun swapFragment(fragment: Fragment) {

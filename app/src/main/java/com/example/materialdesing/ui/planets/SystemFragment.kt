@@ -1,9 +1,6 @@
 package com.example.materialdesing.ui.planets
 
-import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.materialdesing.App
 import com.example.materialdesing.R
@@ -11,12 +8,12 @@ import com.example.materialdesing.databinding.FragmentSystemBinding
 import com.example.materialdesing.domain.entity.earth.EarthDtoItem
 import com.example.materialdesing.domain.repo.EarthRepo
 import com.example.materialdesing.domain.repo.MarsRepo
+import com.example.materialdesing.ui.ViewBindingFragment
 import com.squareup.picasso.Picasso
 
-class SystemFragment : Fragment(R.layout.fragment_system) {
-
-    private var _binding: FragmentSystemBinding? = null
-    private val binding get() = _binding!!
+class SystemFragment : ViewBindingFragment<FragmentSystemBinding>(
+    FragmentSystemBinding::inflate
+) {
 
     private val app: App get() = requireActivity().application as App
 
@@ -34,12 +31,6 @@ class SystemFragment : Fragment(R.layout.fragment_system) {
         )
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        _binding = FragmentSystemBinding.bind(view)
-    }
-
     private fun setPhotoDto(earthDtoItem: EarthDtoItem) {
         binding.fotoSystemImageView.setImageResource(R.drawable.ic_earth)
         earthDtoItem.url
@@ -52,10 +43,5 @@ class SystemFragment : Fragment(R.layout.fragment_system) {
             binding.fotoSystemImageView.scaleType =
                 ImageView.ScaleType.FIT_CENTER
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
