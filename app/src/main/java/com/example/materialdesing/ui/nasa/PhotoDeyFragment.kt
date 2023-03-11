@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.provider.FontRequest
 import androidx.core.provider.FontsContractCompat
+import androidx.core.text.toSpannable
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.transition.*
@@ -66,10 +67,10 @@ class PhotoDeyFragment : ViewBindingFragment<FragmentPhotoDescriptionCoordinator
         onClickIcon()
 
         viewModel.inProgressLiveData.observe(viewLifecycleOwner) { inProgress ->
-            val fullTime = 4_000f
-            object : CountDownTimer(fullTime.toLong(), 1L) {
+            val fullTimeMs = 4_000f
+            object : CountDownTimer(fullTimeMs.toLong(), 1L) {
                 override fun onTick(millisUntilFinished: Long) {
-                    val process = ((1 - millisUntilFinished / fullTime) * 100).toInt()
+                    val process = ((1 - millisUntilFinished / fullTimeMs) * 100).toInt()
 //                    if(binding.progressTaskBar.progress!=process)
                     binding.photoDeyImageView.isVisible = inProgress
                     binding.progressTaskBar.progress = process
@@ -80,17 +81,18 @@ class PhotoDeyFragment : ViewBindingFragment<FragmentPhotoDescriptionCoordinator
                     binding.progressTaskBar.isVisible = inProgress
                 }
             }.start()
-
-            Handler(Looper.getMainLooper()).postDelayed({
-                // проверяем, не умер ли фрагент. Это обязательно, иначе при быстрым
-                // переключением между фрагментами будет падение
-                if (isAdded)
-                    show()
-            }, 5_500)
         }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            // проверяем, не умер ли фрагент. Это обязательно, иначе при быстрым
+            // переключением между фрагментами будет падение
+            if (isAdded)
+                show()
+        }, 5_500)
 
         binding.todayChip.performClick()
         setPhotoDey()
+
 
         binding.todayChip.setOnClickListener {
             setPhotoDey()
@@ -116,6 +118,8 @@ class PhotoDeyFragment : ViewBindingFragment<FragmentPhotoDescriptionCoordinator
         setApproximationImage()
 
         actionСlickingOnFab()
+
+        startRainbow()
     }
 
     private fun actionСlickingOnFab() {
@@ -235,6 +239,11 @@ class PhotoDeyFragment : ViewBindingFragment<FragmentPhotoDescriptionCoordinator
         }
     }
 
+    private fun startRainbow() {
+        rainbow(1, binding.dateTextView)
+        rainbow(1, binding.titleTextView)
+    }
+
     @SuppressLint("NewApi") // не потерять пользователей с 24 по 27 sdk
     private fun setPhotoDto(photoDto: PhotoDto) {
 //        binding.dateTextView.text = photoDto.date
@@ -292,8 +301,8 @@ class PhotoDeyFragment : ViewBindingFragment<FragmentPhotoDescriptionCoordinator
         )
 
         // отметили все буквы "t" красным цветом (прошли по массиву, выбрали индекс и перекрасили букву)
-        for (i in photoDto.explanation.indices) {
-            if (photoDto.explanation[i] == 't') {
+        for (i in spannableStringBuilder.indices) {
+            if (spannableStringBuilder[i] == 't') {
                 spannableStringBuilder.setSpan(
                     ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.red)),
                     i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -301,8 +310,8 @@ class PhotoDeyFragment : ViewBindingFragment<FragmentPhotoDescriptionCoordinator
             }
         }
 
-        for (i in photoDto.explanation.indices) {
-            if (photoDto.explanation[i] == 'u') {
+        for (i in spannableStringBuilder.indices) {
+            if (spannableStringBuilder[i] == 'u') {
                 spannableStringBuilder.setSpan(
                     ForegroundColorSpan(
                         ContextCompat.getColor(
@@ -365,10 +374,12 @@ class PhotoDeyFragment : ViewBindingFragment<FragmentPhotoDescriptionCoordinator
 
         binding.dateTextView.text = spannableStringBuilderDate
 
+//        spannableRainbowTitle = binding.titleTextView.text as SpannableString
+//        spannableRainbowDate = binding.dateTextView.text as SpannableString
         spannableRainbowDate = SpannableString(photoDto.date)
-        rainbow(1, spannableRainbowDate, binding.dateTextView)
         spannableRainbowTitle = SpannableString(photoDto.title)
-        rainbow(1, spannableRainbowTitle, binding.titleTextView)
+        startSetText(spannableRainbowDate, binding.dateTextView)
+        startSetText(spannableRainbowTitle, binding.titleTextView)
     }
 
     interface Controller {
@@ -387,29 +398,32 @@ class PhotoDeyFragment : ViewBindingFragment<FragmentPhotoDescriptionCoordinator
         fun newInstance() = PhotoDeyFragment()
     }
 
-    private fun rainbow(i: Int = 1, span: SpannableString, container: TextView) {
+    private fun rainbow(i: Int = 1, container: TextView) {
         var currentCount = i
-        val x = object : CountDownTimer(20000, 200) {
+        val x = object : CountDownTimer(20_000, 200) {
             override fun onTick(millisUntilFinished: Long) {
-                colorText(currentCount, span, container)
+                colorText(currentCount, container)
                 currentCount = if (++currentCount > 5) 1 else currentCount
             }
 
             override fun onFinish() {
-                rainbow(currentCount, span, container)
+                rainbow(currentCount, container)
             }
         }
         x.start()
     }
 
-    private fun colorText(
-        colorFirstNumber: Int,
+    private fun startSetText(
         spannableString: SpannableString,
         container: TextView
     ) {
         container.setText(spannableString, TextView.BufferType.SPANNABLE)
-        spannableRainbowTitle = container.text as SpannableString
-        spannableRainbowDate = container.text as SpannableString
+    }
+
+    private fun colorText(
+        colorFirstNumber: Int,
+        container: TextView
+    ) {
         val map = mapOf(
             0 to ContextCompat.getColor(requireContext(), R.color.red),
             1 to ContextCompat.getColor(requireContext(), R.color.orange),
@@ -419,6 +433,8 @@ class PhotoDeyFragment : ViewBindingFragment<FragmentPhotoDescriptionCoordinator
             5 to ContextCompat.getColor(requireContext(), R.color.purple_700),
             6 to ContextCompat.getColor(requireContext(), R.color.purple_500)
         )
+        val spannableString: SpannableString = container.text.toSpannable() as SpannableString
+
         val spans = spannableString.getSpans(
             0, spannableString.length,
             ForegroundColorSpan::class.java
